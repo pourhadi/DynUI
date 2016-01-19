@@ -1,6 +1,0 @@
-framework module Pods_DynUI_Example {
-  umbrella header "Pods-DynUI_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}
