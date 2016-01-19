@@ -1,0 +1,14 @@
+PODS:
+  - DynUI (0.1.0)
+
+DEPENDENCIES:
+  - DynUI (from `../`)
+
+EXTERNAL SOURCES:
+  DynUI:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DynUI: abbb21ebf0c0f49d7f7833bad9dcffebadb04372
+
+COCOAPODS: 0.39.0
