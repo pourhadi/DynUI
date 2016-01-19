@@ -8,5 +8,5 @@ end
 target 'DynUI_Tests', :exclusive => true do
   pod "DynUI", :path => "../"
 
-  
+#pod 'SuperSerial', :git => "https://github.com/pourhadi/SuperSerial.git"
 end

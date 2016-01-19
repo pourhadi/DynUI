@@ -7,120 +7,201 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		025A6245F16FFBA01507053263C543EF /* Pods-DynUI_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED8E55C86844D84F9882C858DFBB9F2 /* Pods-DynUI_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C66CDE406F5A03C5B3215E6E6E41144 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		13E3DF33260D52C1E4F382D971949740 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		15882B9DCEBCA40E728FB5B4A5A49EED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		44193EB41C4E116E00EA7C20 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB01C4E116E00EA7C20 /* Extensions.swift */; };
-		44193EB51C4E116E00EA7C20 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB11C4E116E00EA7C20 /* Style.swift */; };
-		44193EB61C4E116E00EA7C20 /* Styleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB21C4E116E00EA7C20 /* Styleable.swift */; };
-		44193EB71C4E116E00EA7C20 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB31C4E116E00EA7C20 /* UIColorExtension.swift */; };
-		4D7191F8DCEA34320F62896931824C80 /* Pods-DynUI_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABAF038CD6C3308FD29C9E4A034121 /* Pods-DynUI_Tests-dummy.m */; };
-		61D4FC8275ED7A49B6A252C212C5EE0A /* DynUI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 879E0595CE5446D493E509A4B51D4E8B /* DynUI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A863697E3BE129E3E4E951AA70C02CA9 /* Pods-DynUI_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 479D47FEC8528F99C3AB593A99FE8017 /* Pods-DynUI_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ACCED5B84FD9A70BE33E6E2E8A8670D7 /* Pods-DynUI_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 039F7D61F3BFAB617900118AD63370FC /* Pods-DynUI_Example-dummy.m */; };
-		B991F138E03D0AF178A15C7B891D3AAF /* DynUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E5684543A6FA3DC8C5EEFC995722761B /* DynUI.bundle */; };
-		BD49B9893CB37FC1D431273D94236785 /* DynUI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E9D8B48B40CA2CE80088F3FAE87CE /* DynUI-dummy.m */; };
+		04FD49601F29F522D8E425609D0C4F67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFE35853FD14D8D447B5C7706CA7003 /* Foundation.framework */; };
+		1598B62656B3D0E061626348B808E11E /* Styleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67372C065F47CE4E1080F640A6B62ED /* Styleable.swift */; };
+		2503D4CCCFF88785E331ACF0C94219B1 /* Pods-DynUI_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 479D47FEC8528F99C3AB593A99FE8017 /* Pods-DynUI_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2696120960F4663AD5A56D5E05A6655C /* Pods-DynUI_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 039F7D61F3BFAB617900118AD63370FC /* Pods-DynUI_Example-dummy.m */; };
+		2EA561171DE3F30057D6A2C1C2EF0D6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFE35853FD14D8D447B5C7706CA7003 /* Foundation.framework */; };
+		45055E3FE71555955E6B4163E136A96C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9FB8CA47FA720EC5F9D8C709B262B /* Extensions.swift */; };
+		49091F03D00415FD3745A6E8665D5570 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8768CE0BB59993E02B2F3504E73218EF /* Style.swift */; };
+		528865FA7F2878C6746C9963D76D54A1 /* DynUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C55446D79F6D75353998BE4AE03B56CC /* DynUI.bundle */; };
+		53D909659C21473EC76B8612D02C01F0 /* SuperSerial.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6A67EBB30518ACA1448862714DB6F6D9 /* SuperSerial.bundle */; };
+		5539E450A54D1347C3A1BC876CC4167A /* Pods-DynUI_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED8E55C86844D84F9882C858DFBB9F2 /* Pods-DynUI_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72BD274458A07889DCC71A82C1611F59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFE35853FD14D8D447B5C7706CA7003 /* Foundation.framework */; };
+		83C4463761B611153EC2FC296F38CD51 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393581519905EAA09909EAF45B1FB45C /* Serialization.swift */; };
+		971259232C1D4C76AFBAE21D826F7CB8 /* Pods-DynUI_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABAF038CD6C3308FD29C9E4A034121 /* Pods-DynUI_Tests-dummy.m */; };
+		AE7FBDF1D44E9607632EEB7EE1B61BAA /* SuperSerial-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FD4A13DF59382B5E7B165523D5652BF7 /* SuperSerial-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE2DEA1CCB59A1A1AF11BEF2F6C165B9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72653180AD606A5CC494DF31A4983AF3 /* Extensions.swift */; };
+		C116EB1092BB6E749E041B40008C1705 /* DynUI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 879E0595CE5446D493E509A4B51D4E8B /* DynUI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9ABD7D3065BE3D412057618DFF4F6D1 /* DynUI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E9D8B48B40CA2CE80088F3FAE87CE /* DynUI-dummy.m */; };
+		CC29DF156BEAFEE653CE59BBB624B0D4 /* SuperSerial-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 95F7863F8AEB60D3FB7E2ACFF2AA5FA6 /* SuperSerial-dummy.m */; };
+		D5F5D9CF0692B5591CB13B49B867C02A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFE35853FD14D8D447B5C7706CA7003 /* Foundation.framework */; };
+		DC7E593A58DFBE17E840CA2A48C130FC /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3246DBC16F1BB074D5CDC016889878 /* UIColorExtension.swift */; };
+		FC884469342CA5C4F8386892877929DD /* SuperSerial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3E8134C26ABC4EBE54A5B7E8F1F003 /* SuperSerial.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6C1BDCA01E222325162667C81C166208 /* PBXContainerItemProxy */ = {
+		249DDC2D5A757F839AB6E962A87F80D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2345F584EFED1758EFF50B2CF6477882;
+			remoteGlobalIDString = 103FD2A7AB68B063126546F12A96B3EF;
+			remoteInfo = SuperSerial;
+		};
+		6B5A7982ADDA9A2EB7C15042D41E363A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B67FFECB99D7BD12B639B2716418E35B;
 			remoteInfo = DynUI;
 		};
-		989D93AE7A76941CFF4A3F3C53D04BD1 /* PBXContainerItemProxy */ = {
+		714F0A1A354BE2B5873442DE6D31CB97 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FD084894A0DAC8B6206367F160BCA551;
+			remoteGlobalIDString = 103FD2A7AB68B063126546F12A96B3EF;
+			remoteInfo = SuperSerial;
+		};
+		7482BDAA5C3B7832A1CC3AF75A233E8F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 57A4554796D6F03D09D0009321988649;
+			remoteInfo = "SuperSerial-SuperSerial";
+		};
+		8073836B2B2D8BF568133FF4643B01D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3677879D6B96533525A7A54C1F07CFA7;
 			remoteInfo = "DynUI-DynUI";
 		};
-		D424CD2A74720B9C6B0586CA22CE0CED /* PBXContainerItemProxy */ = {
+		A6F8C13D7527380C270BBAE5AA00EA22 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2345F584EFED1758EFF50B2CF6477882;
+			remoteGlobalIDString = 103FD2A7AB68B063126546F12A96B3EF;
+			remoteInfo = SuperSerial;
+		};
+		C83153C866A78DCF53A55969C694C531 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B67FFECB99D7BD12B639B2716418E35B;
 			remoteInfo = DynUI;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		039F7D61F3BFAB617900118AD63370FC /* Pods-DynUI_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DynUI_Example-dummy.m"; sourceTree = "<group>"; };
-		08A9C9B029FDFCB7074B93C21AAA1CB9 /* Pods_DynUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DynUI_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BD3D6383662F07B8A282F80C613CD47 /* SuperSerial.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SuperSerial.xcconfig; sourceTree = "<group>"; };
+		2067C09F72E6F4CCB01ACDC126A9CDAA /* Pods_DynUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DynUI_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		20FADC62C68FA5CA0F7D1F99017BC64D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21EE16B1824CCFB844D076651567F268 /* Pods-DynUI_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DynUI_Example-frameworks.sh"; sourceTree = "<group>"; };
 		29B66A1F8B948E123C953DC42368DECA /* Pods-DynUI_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DynUI_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		3681F25089EDC26BD46E5853BCE4B3CA /* Pods-DynUI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DynUI_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		393581519905EAA09909EAF45B1FB45C /* Serialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Serialization.swift; path = Pod/Classes/Serialization.swift; sourceTree = "<group>"; };
+		3BC428FC9BA06FC3646C09B02D134834 /* SuperSerial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SuperSerial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ED8E55C86844D84F9882C858DFBB9F2 /* Pods-DynUI_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DynUI_Example-umbrella.h"; sourceTree = "<group>"; };
-		44193EB01C4E116E00EA7C20 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		44193EB11C4E116E00EA7C20 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		44193EB21C4E116E00EA7C20 /* Styleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styleable.swift; sourceTree = "<group>"; };
-		44193EB31C4E116E00EA7C20 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		479D47FEC8528F99C3AB593A99FE8017 /* Pods-DynUI_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DynUI_Tests-umbrella.h"; sourceTree = "<group>"; };
-		4B4A757CFB8A64BAEFCEF8C45C0F7DF6 /* DynUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DynUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		564E9D8B48B40CA2CE80088F3FAE87CE /* DynUI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DynUI-dummy.m"; sourceTree = "<group>"; };
 		5A8E29C799CA4C57BD446FAC3673644A /* Pods-DynUI_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DynUI_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		5DE9DA717986797C3C74517A5661A1D6 /* DynUI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = DynUI.modulemap; sourceTree = "<group>"; };
 		63761105C586D378CE584BDFB205AADA /* Pods-DynUI_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DynUI_Example-resources.sh"; sourceTree = "<group>"; };
+		6A67EBB30518ACA1448862714DB6F6D9 /* SuperSerial.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperSerial.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CB28D8A873ED985104D305190F2D7AF /* Pods_DynUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DynUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72653180AD606A5CC494DF31A4983AF3 /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Pod/Classes/Extensions.swift; sourceTree = "<group>"; };
 		7674CCFE55D181F4160B8C72F1D8165E /* Pods-DynUI_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DynUI_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		7CFE35853FD14D8D447B5C7706CA7003 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		8768CE0BB59993E02B2F3504E73218EF /* Style.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		87807ECC807108D1C2AA46135F389FA0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		879E0595CE5446D493E509A4B51D4E8B /* DynUI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DynUI-umbrella.h"; sourceTree = "<group>"; };
 		8A24A9B69F9DE9D6DF9226146C2D909D /* Pods-DynUI_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DynUI_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		915969037868662EEA477EE5882541FA /* Pods-DynUI_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DynUI_Tests-resources.sh"; sourceTree = "<group>"; };
+		95F7863F8AEB60D3FB7E2ACFF2AA5FA6 /* SuperSerial-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SuperSerial-dummy.m"; sourceTree = "<group>"; };
+		9735B372F21ACA4F557D2EF69BB45438 /* SuperSerial.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SuperSerial.modulemap; sourceTree = "<group>"; };
+		9D5B1B34F9DA762DD823CDE4F11FFA36 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E3E8134C26ABC4EBE54A5B7E8F1F003 /* SuperSerial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SuperSerial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BDB365D2A29F6C8B4E0F2F3E5D158B /* Pods-DynUI_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-DynUI_Tests.modulemap"; sourceTree = "<group>"; };
+		AE3246DBC16F1BB074D5CDC016889878 /* UIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		B0A551CBB9C0E9420D99608520B1A325 /* Pods-DynUI_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DynUI_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		B2ABAF038CD6C3308FD29C9E4A034121 /* Pods-DynUI_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DynUI_Tests-dummy.m"; sourceTree = "<group>"; };
+		B3A9FB8CA47FA720EC5F9D8C709B262B /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B67372C065F47CE4E1080F640A6B62ED /* Styleable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Styleable.swift; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BFA1E25CB2D0D82FEFA50FC898FA5C05 /* Pods-DynUI_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DynUI_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C4617434C6704AFE21070A6CB29AF782 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C55446D79F6D75353998BE4AE03B56CC /* DynUI.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynUI.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8960EBB5FFB6B8E637F7B250BBF0791 /* DynUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DynUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6658507CE22F35F539A2CDBBE308BB7 /* DynUI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DynUI.xcconfig; sourceTree = "<group>"; };
 		DD8964D2DBDAA356CB5146FEF128B8BC /* Pods-DynUI_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-DynUI_Example.modulemap"; sourceTree = "<group>"; };
 		DF1C53D00522B9F5F1E260964DCD312B /* Pods-DynUI_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DynUI_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		E5684543A6FA3DC8C5EEFC995722761B /* DynUI.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynUI.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4DF15CAFF70B1F97E234539425E661E /* SuperSerial-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SuperSerial-prefix.pch"; sourceTree = "<group>"; };
 		F1CA1DDBE970C3012B9B4871416CB84D /* Pods-DynUI_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DynUI_Example.release.xcconfig"; sourceTree = "<group>"; };
-		F20539D318B152F4B50F7AAF41FC6EEB /* Pods_DynUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DynUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC03517061928A1A3FC565C47CE5402B /* DynUI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DynUI-prefix.pch"; sourceTree = "<group>"; };
+		FD4A13DF59382B5E7B165523D5652BF7 /* SuperSerial-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SuperSerial-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		283145A624BD74ABE5C9712D63FFA2BC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				15882B9DCEBCA40E728FB5B4A5A49EED /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		61AB54DEE14F89E90D23A0312E0AD003 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				13E3DF33260D52C1E4F382D971949740 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7ED1BC1A132AD3605531F04E5FACC1F9 /* Frameworks */ = {
+		1C3710E9E060952955B06F489F8D4DEC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CEB7BB296D16544CEE936554C7A304C0 /* Frameworks */ = {
+		53D67C006D13F1F234CAEF6B8AABB204 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C66CDE406F5A03C5B3215E6E6E41144 /* Foundation.framework in Frameworks */,
+				04FD49601F29F522D8E425609D0C4F67 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75E6FC23055B6CFEA6BA18D7023454B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5F5D9CF0692B5591CB13B49B867C02A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		87C368E4496D016FD5ACFEB9BF294561 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72BD274458A07889DCC71A82C1611F59 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEEE0047623055904496D5142971118B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C20A096823C82983F4DF7DA8C430CA7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EA561171DE3F30057D6A2C1C2EF0D6F /* Foundation.framework in Frameworks */,
+				FC884469342CA5C4F8386892877929DD /* SuperSerial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D58129E7B14A5DD2DB9E18FD5966F68 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B3A9FB8CA47FA720EC5F9D8C709B262B /* Extensions.swift */,
+				8768CE0BB59993E02B2F3504E73218EF /* Style.swift */,
+				B67372C065F47CE4E1080F640A6B62ED /* Styleable.swift */,
+				AE3246DBC16F1BB074D5CDC016889878 /* UIColorExtension.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		2DE65A5B8BEFC1D4F2D2C9318E38F71D /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				0D58129E7B14A5DD2DB9E18FD5966F68 /* Classes */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
 		344FA2E39AEDFEC1ACC4F6667708AC6B /* Pods-DynUI_Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,15 +220,57 @@
 			path = "Target Support Files/Pods-DynUI_Example";
 			sourceTree = "<group>";
 		};
+		347CF6F3C666507C0CFFD0C28A30C6D3 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7CFE35853FD14D8D447B5C7706CA7003 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		537F6CC6FC33D83F9E048D116540AD7D /* SuperSerial */ = {
+			isa = PBXGroup;
+			children = (
+				72653180AD606A5CC494DF31A4983AF3 /* Extensions.swift */,
+				393581519905EAA09909EAF45B1FB45C /* Serialization.swift */,
+				778CEBDAE253656482B3342536CBEABC /* Support Files */,
+			);
+			path = SuperSerial;
+			sourceTree = "<group>";
+		};
+		778CEBDAE253656482B3342536CBEABC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9D5B1B34F9DA762DD823CDE4F11FFA36 /* Info.plist */,
+				9735B372F21ACA4F557D2EF69BB45438 /* SuperSerial.modulemap */,
+				1BD3D6383662F07B8A282F80C613CD47 /* SuperSerial.xcconfig */,
+				95F7863F8AEB60D3FB7E2ACFF2AA5FA6 /* SuperSerial-dummy.m */,
+				E4DF15CAFF70B1F97E234539425E661E /* SuperSerial-prefix.pch */,
+				FD4A13DF59382B5E7B165523D5652BF7 /* SuperSerial-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SuperSerial";
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				AC4AACE55C6C9CC95FBC17B3F29D6A10 /* Development Pods */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				BE3858E9E8B581373A1DA20AA06E8412 /* Products */,
+				8F1CD0438A2C0C4C5E74937C555167AB /* Frameworks */,
+				F040C519B42E093D7F7E42A6BF270908 /* Pods */,
+				C8DB1FD31DFFC2C1C625BAA1144C6BE3 /* Products */,
 				C9FD8E7350A3FB137BE16A3290662BF6 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		8F1CD0438A2C0C4C5E74937C555167AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E3E8134C26ABC4EBE54A5B7E8F1F003 /* SuperSerial.framework */,
+				347CF6F3C666507C0CFFD0C28A30C6D3 /* iOS */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		97F364664FB723DA7588CD3D8109F63B /* Support Files */ = {
@@ -164,47 +287,12 @@
 			path = "Example/Pods/Target Support Files/DynUI";
 			sourceTree = "<group>";
 		};
-		AB744D14F16142BD28AC2E55EF42B284 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				D2C0115A64EC1015B2C24A443AC7DD1E /* Classes */,
-			);
-			path = Pod;
-			sourceTree = "<group>";
-		};
 		AC4AACE55C6C9CC95FBC17B3F29D6A10 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
 				DA9376F42C4438FF26476A7005052877 /* DynUI */,
 			);
 			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BE3858E9E8B581373A1DA20AA06E8412 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E5684543A6FA3DC8C5EEFC995722761B /* DynUI.bundle */,
-				4B4A757CFB8A64BAEFCEF8C45C0F7DF6 /* DynUI.framework */,
-				08A9C9B029FDFCB7074B93C21AAA1CB9 /* Pods_DynUI_Example.framework */,
-				F20539D318B152F4B50F7AAF41FC6EEB /* Pods_DynUI_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		C52F18A8EA2AD40A96061071EE0C100F /* Pods-DynUI_Tests */ = {
@@ -225,6 +313,19 @@
 			path = "Target Support Files/Pods-DynUI_Tests";
 			sourceTree = "<group>";
 		};
+		C8DB1FD31DFFC2C1C625BAA1144C6BE3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C55446D79F6D75353998BE4AE03B56CC /* DynUI.bundle */,
+				C8960EBB5FFB6B8E637F7B250BBF0791 /* DynUI.framework */,
+				2067C09F72E6F4CCB01ACDC126A9CDAA /* Pods_DynUI_Example.framework */,
+				6CB28D8A873ED985104D305190F2D7AF /* Pods_DynUI_Tests.framework */,
+				6A67EBB30518ACA1448862714DB6F6D9 /* SuperSerial.bundle */,
+				3BC428FC9BA06FC3646C09B02D134834 /* SuperSerial.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C9FD8E7350A3FB137BE16A3290662BF6 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,119 +335,88 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		D2C0115A64EC1015B2C24A443AC7DD1E /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				44193EB01C4E116E00EA7C20 /* Extensions.swift */,
-				44193EB11C4E116E00EA7C20 /* Style.swift */,
-				44193EB21C4E116E00EA7C20 /* Styleable.swift */,
-				44193EB31C4E116E00EA7C20 /* UIColorExtension.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		DA9376F42C4438FF26476A7005052877 /* DynUI */ = {
 			isa = PBXGroup;
 			children = (
-				AB744D14F16142BD28AC2E55EF42B284 /* Pod */,
+				2DE65A5B8BEFC1D4F2D2C9318E38F71D /* Pod */,
 				97F364664FB723DA7588CD3D8109F63B /* Support Files */,
 			);
 			name = DynUI;
 			path = ../..;
 			sourceTree = "<group>";
 		};
+		F040C519B42E093D7F7E42A6BF270908 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				537F6CC6FC33D83F9E048D116540AD7D /* SuperSerial */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		0692B73BABC1E5413D8CBC8CC0E787D0 /* Headers */ = {
+		1425D459B84836B7676C852C4A184DFD /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A863697E3BE129E3E4E951AA70C02CA9 /* Pods-DynUI_Tests-umbrella.h in Headers */,
+				2503D4CCCFF88785E331ACF0C94219B1 /* Pods-DynUI_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5D7BD2F11DE9B9D08ACCB9FCAB44C356 /* Headers */ = {
+		81632F4E3B43C93CD411890686B43EC4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025A6245F16FFBA01507053263C543EF /* Pods-DynUI_Example-umbrella.h in Headers */,
+				AE7FBDF1D44E9607632EEB7EE1B61BAA /* SuperSerial-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6089155B73070E980A28008459623702 /* Headers */ = {
+		E19E4DA38F82C32B068E8BB569E229E6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61D4FC8275ED7A49B6A252C212C5EE0A /* DynUI-umbrella.h in Headers */,
+				C116EB1092BB6E749E041B40008C1705 /* DynUI-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4F67DB890B06193679944E0C230D44F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5539E450A54D1347C3A1BC876CC4167A /* Pods-DynUI_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0DAB6444CF854EB98329970B49D8F2CD /* Pods-DynUI_Example */ = {
+		103FD2A7AB68B063126546F12A96B3EF /* SuperSerial */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9A6732F8915138C43BB3CE678CD3CFA5 /* Build configuration list for PBXNativeTarget "Pods-DynUI_Example" */;
+			buildConfigurationList = 5ABB4D5E819271462A17F532D5F78758 /* Build configuration list for PBXNativeTarget "SuperSerial" */;
 			buildPhases = (
-				47F9502679ACA75013CC5EFD5D655907 /* Sources */,
-				CEB7BB296D16544CEE936554C7A304C0 /* Frameworks */,
-				5D7BD2F11DE9B9D08ACCB9FCAB44C356 /* Headers */,
+				ABE80429609D3C6C2CED6584D8C81049 /* Sources */,
+				53D67C006D13F1F234CAEF6B8AABB204 /* Frameworks */,
+				48966C15F14D4347D760F646F8FB8710 /* Resources */,
+				81632F4E3B43C93CD411890686B43EC4 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8BC622687BFD1E4A33050EE63113EF54 /* PBXTargetDependency */,
+				FB08AA485C98071B70E4482EAC7B7DEB /* PBXTargetDependency */,
 			);
-			name = "Pods-DynUI_Example";
-			productName = "Pods-DynUI_Example";
-			productReference = 08A9C9B029FDFCB7074B93C21AAA1CB9 /* Pods_DynUI_Example.framework */;
+			name = SuperSerial;
+			productName = SuperSerial;
+			productReference = 3BC428FC9BA06FC3646C09B02D134834 /* SuperSerial.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		2345F584EFED1758EFF50B2CF6477882 /* DynUI */ = {
+		3677879D6B96533525A7A54C1F07CFA7 /* DynUI-DynUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 53701537A85676740CB045CF7D85645F /* Build configuration list for PBXNativeTarget "DynUI" */;
+			buildConfigurationList = 212FDF75FDB1214238F40735A4A32F91 /* Build configuration list for PBXNativeTarget "DynUI-DynUI" */;
 			buildPhases = (
-				24DCACBECDE73E8D85211717266B42EE /* Sources */,
-				283145A624BD74ABE5C9712D63FFA2BC /* Frameworks */,
-				258F93273D379A50D9B8DD880E013D19 /* Resources */,
-				6089155B73070E980A28008459623702 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5723E9FB129CEF9537E8DF9C1E03247F /* PBXTargetDependency */,
-			);
-			name = DynUI;
-			productName = DynUI;
-			productReference = 4B4A757CFB8A64BAEFCEF8C45C0F7DF6 /* DynUI.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7B720321F56D5BA17DA60DD8D0D15C98 /* Pods-DynUI_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EF9B097645DD691A86881D0A23AEE60F /* Build configuration list for PBXNativeTarget "Pods-DynUI_Tests" */;
-			buildPhases = (
-				7DB6AD01CEC3CEF817BC9446D5F26E71 /* Sources */,
-				61AB54DEE14F89E90D23A0312E0AD003 /* Frameworks */,
-				0692B73BABC1E5413D8CBC8CC0E787D0 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				338010C40F0F2CC5032C7FF905AC3991 /* PBXTargetDependency */,
-			);
-			name = "Pods-DynUI_Tests";
-			productName = "Pods-DynUI_Tests";
-			productReference = F20539D318B152F4B50F7AAF41FC6EEB /* Pods_DynUI_Tests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		FD084894A0DAC8B6206367F160BCA551 /* DynUI-DynUI */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BD10A5467C0F5C720C7AFD09DAD5B76C /* Build configuration list for PBXNativeTarget "DynUI-DynUI" */;
-			buildPhases = (
-				BDC4737A305D719867160DF21E4198A3 /* Sources */,
-				7ED1BC1A132AD3605531F04E5FACC1F9 /* Frameworks */,
-				253B55C959CEB72F6D5257F07504FF73 /* Resources */,
+				46AE10C65A38472AA5576364F1C91D01 /* Sources */,
+				BEEE0047623055904496D5142971118B /* Frameworks */,
+				F26854A7F9532C103520426CD24F3C69 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -354,8 +424,83 @@
 			);
 			name = "DynUI-DynUI";
 			productName = "DynUI-DynUI";
-			productReference = E5684543A6FA3DC8C5EEFC995722761B /* DynUI.bundle */;
+			productReference = C55446D79F6D75353998BE4AE03B56CC /* DynUI.bundle */;
 			productType = "com.apple.product-type.bundle";
+		};
+		57A4554796D6F03D09D0009321988649 /* SuperSerial-SuperSerial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 015E73326CB1497847DFDE0AACBFAFA4 /* Build configuration list for PBXNativeTarget "SuperSerial-SuperSerial" */;
+			buildPhases = (
+				C3057A65CD565BF6E832DCD58D849976 /* Sources */,
+				1C3710E9E060952955B06F489F8D4DEC /* Frameworks */,
+				5514237AA2B1E09DC3131F0CF85AF1ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SuperSerial-SuperSerial";
+			productName = "SuperSerial-SuperSerial";
+			productReference = 6A67EBB30518ACA1448862714DB6F6D9 /* SuperSerial.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		62FAFFDD674D2E21A63582F8D77A3891 /* Pods-DynUI_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 881AD79112453150C1A6E7CB04FE595E /* Build configuration list for PBXNativeTarget "Pods-DynUI_Tests" */;
+			buildPhases = (
+				F52D44CDB26B39BDDE584C5912C6B30D /* Sources */,
+				75E6FC23055B6CFEA6BA18D7023454B2 /* Frameworks */,
+				1425D459B84836B7676C852C4A184DFD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				12AB7A19D88270501EDD194424628E9C /* PBXTargetDependency */,
+				02D77C1B7DCF8F8D0B80F64422D47B92 /* PBXTargetDependency */,
+			);
+			name = "Pods-DynUI_Tests";
+			productName = "Pods-DynUI_Tests";
+			productReference = 6CB28D8A873ED985104D305190F2D7AF /* Pods_DynUI_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B67FFECB99D7BD12B639B2716418E35B /* DynUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC4A3F4BF8FC36F04E1DDF75AD65ACF4 /* Build configuration list for PBXNativeTarget "DynUI" */;
+			buildPhases = (
+				1A2D684A9EAD8260EA7436D40A2783E1 /* Sources */,
+				C20A096823C82983F4DF7DA8C430CA7F /* Frameworks */,
+				6C823B6BD9C9B38145EF03560C9D6F8C /* Resources */,
+				E19E4DA38F82C32B068E8BB569E229E6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49FBC075742F257CF901C0E2423C914D /* PBXTargetDependency */,
+				FBFE6AA5E35DCDCD75123ACE1DBA7BEC /* PBXTargetDependency */,
+			);
+			name = DynUI;
+			productName = DynUI;
+			productReference = C8960EBB5FFB6B8E637F7B250BBF0791 /* DynUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F198A886FE10E790E4986AAF120EE79C /* Pods-DynUI_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E0FB850CECA504A4A037E8CE16A66939 /* Build configuration list for PBXNativeTarget "Pods-DynUI_Example" */;
+			buildPhases = (
+				228E70F808D5294C6D70B07D267FA4A2 /* Sources */,
+				87C368E4496D016FD5ACFEB9BF294561 /* Frameworks */,
+				E4F67DB890B06193679944E0C230D44F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA1B407341810E0F9341DB76BD1F8E23 /* PBXTargetDependency */,
+				6201DC06BD9920D59A406BDF3075C554 /* PBXTargetDependency */,
+			);
+			name = "Pods-DynUI_Example";
+			productName = "Pods-DynUI_Example";
+			productReference = 2067C09F72E6F4CCB01ACDC126A9CDAA /* Pods_DynUI_Example.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -374,165 +519,154 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = BE3858E9E8B581373A1DA20AA06E8412 /* Products */;
+			productRefGroup = C8DB1FD31DFFC2C1C625BAA1144C6BE3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2345F584EFED1758EFF50B2CF6477882 /* DynUI */,
-				FD084894A0DAC8B6206367F160BCA551 /* DynUI-DynUI */,
-				0DAB6444CF854EB98329970B49D8F2CD /* Pods-DynUI_Example */,
-				7B720321F56D5BA17DA60DD8D0D15C98 /* Pods-DynUI_Tests */,
+				B67FFECB99D7BD12B639B2716418E35B /* DynUI */,
+				3677879D6B96533525A7A54C1F07CFA7 /* DynUI-DynUI */,
+				F198A886FE10E790E4986AAF120EE79C /* Pods-DynUI_Example */,
+				62FAFFDD674D2E21A63582F8D77A3891 /* Pods-DynUI_Tests */,
+				103FD2A7AB68B063126546F12A96B3EF /* SuperSerial */,
+				57A4554796D6F03D09D0009321988649 /* SuperSerial-SuperSerial */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		253B55C959CEB72F6D5257F07504FF73 /* Resources */ = {
+		48966C15F14D4347D760F646F8FB8710 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53D909659C21473EC76B8612D02C01F0 /* SuperSerial.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5514237AA2B1E09DC3131F0CF85AF1ED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		258F93273D379A50D9B8DD880E013D19 /* Resources */ = {
+		6C823B6BD9C9B38145EF03560C9D6F8C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B991F138E03D0AF178A15C7B891D3AAF /* DynUI.bundle in Resources */,
+				528865FA7F2878C6746C9963D76D54A1 /* DynUI.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26854A7F9532C103520426CD24F3C69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		24DCACBECDE73E8D85211717266B42EE /* Sources */ = {
+		1A2D684A9EAD8260EA7436D40A2783E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44193EB61C4E116E00EA7C20 /* Styleable.swift in Sources */,
-				BD49B9893CB37FC1D431273D94236785 /* DynUI-dummy.m in Sources */,
-				44193EB41C4E116E00EA7C20 /* Extensions.swift in Sources */,
-				44193EB51C4E116E00EA7C20 /* Style.swift in Sources */,
-				44193EB71C4E116E00EA7C20 /* UIColorExtension.swift in Sources */,
+				C9ABD7D3065BE3D412057618DFF4F6D1 /* DynUI-dummy.m in Sources */,
+				45055E3FE71555955E6B4163E136A96C /* Extensions.swift in Sources */,
+				49091F03D00415FD3745A6E8665D5570 /* Style.swift in Sources */,
+				1598B62656B3D0E061626348B808E11E /* Styleable.swift in Sources */,
+				DC7E593A58DFBE17E840CA2A48C130FC /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		47F9502679ACA75013CC5EFD5D655907 /* Sources */ = {
+		228E70F808D5294C6D70B07D267FA4A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACCED5B84FD9A70BE33E6E2E8A8670D7 /* Pods-DynUI_Example-dummy.m in Sources */,
+				2696120960F4663AD5A56D5E05A6655C /* Pods-DynUI_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7DB6AD01CEC3CEF817BC9446D5F26E71 /* Sources */ = {
+		46AE10C65A38472AA5576364F1C91D01 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D7191F8DCEA34320F62896931824C80 /* Pods-DynUI_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDC4737A305D719867160DF21E4198A3 /* Sources */ = {
+		ABE80429609D3C6C2CED6584D8C81049 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2DEA1CCB59A1A1AF11BEF2F6C165B9 /* Extensions.swift in Sources */,
+				83C4463761B611153EC2FC296F38CD51 /* Serialization.swift in Sources */,
+				CC29DF156BEAFEE653CE59BBB624B0D4 /* SuperSerial-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3057A65CD565BF6E832DCD58D849976 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F52D44CDB26B39BDDE584C5912C6B30D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				971259232C1D4C76AFBAE21D826F7CB8 /* Pods-DynUI_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		338010C40F0F2CC5032C7FF905AC3991 /* PBXTargetDependency */ = {
+		02D77C1B7DCF8F8D0B80F64422D47B92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SuperSerial;
+			target = 103FD2A7AB68B063126546F12A96B3EF /* SuperSerial */;
+			targetProxy = 714F0A1A354BE2B5873442DE6D31CB97 /* PBXContainerItemProxy */;
+		};
+		12AB7A19D88270501EDD194424628E9C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = DynUI;
-			target = 2345F584EFED1758EFF50B2CF6477882 /* DynUI */;
-			targetProxy = D424CD2A74720B9C6B0586CA22CE0CED /* PBXContainerItemProxy */;
+			target = B67FFECB99D7BD12B639B2716418E35B /* DynUI */;
+			targetProxy = C83153C866A78DCF53A55969C694C531 /* PBXContainerItemProxy */;
 		};
-		5723E9FB129CEF9537E8DF9C1E03247F /* PBXTargetDependency */ = {
+		49FBC075742F257CF901C0E2423C914D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "DynUI-DynUI";
-			target = FD084894A0DAC8B6206367F160BCA551 /* DynUI-DynUI */;
-			targetProxy = 989D93AE7A76941CFF4A3F3C53D04BD1 /* PBXContainerItemProxy */;
+			target = 3677879D6B96533525A7A54C1F07CFA7 /* DynUI-DynUI */;
+			targetProxy = 8073836B2B2D8BF568133FF4643B01D3 /* PBXContainerItemProxy */;
 		};
-		8BC622687BFD1E4A33050EE63113EF54 /* PBXTargetDependency */ = {
+		6201DC06BD9920D59A406BDF3075C554 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SuperSerial;
+			target = 103FD2A7AB68B063126546F12A96B3EF /* SuperSerial */;
+			targetProxy = 249DDC2D5A757F839AB6E962A87F80D4 /* PBXContainerItemProxy */;
+		};
+		EA1B407341810E0F9341DB76BD1F8E23 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = DynUI;
-			target = 2345F584EFED1758EFF50B2CF6477882 /* DynUI */;
-			targetProxy = 6C1BDCA01E222325162667C81C166208 /* PBXContainerItemProxy */;
+			target = B67FFECB99D7BD12B639B2716418E35B /* DynUI */;
+			targetProxy = 6B5A7982ADDA9A2EB7C15042D41E363A /* PBXContainerItemProxy */;
+		};
+		FB08AA485C98071B70E4482EAC7B7DEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SuperSerial-SuperSerial";
+			target = 57A4554796D6F03D09D0009321988649 /* SuperSerial-SuperSerial */;
+			targetProxy = 7482BDAA5C3B7832A1CC3AF75A233E8F /* PBXContainerItemProxy */;
+		};
+		FBFE6AA5E35DCDCD75123ACE1DBA7BEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SuperSerial;
+			target = 103FD2A7AB68B063126546F12A96B3EF /* SuperSerial */;
+			targetProxy = A6F8C13D7527380C270BBAE5AA00EA22 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0006AEB5D191A7B14806EADEE9D6A3B1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6658507CE22F35F539A2CDBBE308BB7 /* DynUI.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/DynUI/DynUI-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DynUI/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DynUI/DynUI.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = DynUI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		0AA9E1119DBF31C48AC8BC596885CB58 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6658507CE22F35F539A2CDBBE308BB7 /* DynUI.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = DynUI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		0DF3F618FB0F0616592E349DF4CA356A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1CA1DDBE970C3012B9B4871416CB84D /* Pods-DynUI_Example.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-DynUI_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-DynUI_Example/Pods-DynUI_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_DynUI_Example;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		10DE1947DAC0ED28F6C0A9F9BD75D546 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -566,6 +700,117 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		14FE3297EB61A6C953DC7DB393A53F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BD3D6383662F07B8A282F80C613CD47 /* SuperSerial.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = SuperSerial;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		1753957F2B2F7A552A0ABA60D0808B7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BD3D6383662F07B8A282F80C613CD47 /* SuperSerial.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SuperSerial/SuperSerial-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SuperSerial/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SuperSerial/SuperSerial.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SuperSerial;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3EDCCA1DB99AB8E6D4ED387F4D2CDD4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6658507CE22F35F539A2CDBBE308BB7 /* DynUI.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = DynUI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		4D6C8EEA525EE797466C56C1882DF028 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6658507CE22F35F539A2CDBBE308BB7 /* DynUI.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/DynUI/DynUI-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DynUI/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DynUI/DynUI.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = DynUI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		51C61C42CCA84C79A3FFE4496C5BC690 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29B66A1F8B948E123C953DC42368DECA /* Pods-DynUI_Example.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-DynUI_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-DynUI_Example/Pods-DynUI_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_DynUI_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		552D02D5BA751AC2E8790D2811D496CA /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -606,7 +851,76 @@
 			};
 			name = Debug;
 		};
-		88126D547691C4949FBB3DB6403CDA0B /* Release */ = {
+		5FCDA74DA9CDACFE17C9EA1AAC63DBE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1CA1DDBE970C3012B9B4871416CB84D /* Pods-DynUI_Example.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-DynUI_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-DynUI_Example/Pods-DynUI_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_DynUI_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7C054F5E458E041C2D341509CF5704E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BD3D6383662F07B8A282F80C613CD47 /* SuperSerial.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = SuperSerial;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		94D399EE11B39D8567AD2CE1912F9749 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BD3D6383662F07B8A282F80C613CD47 /* SuperSerial.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SuperSerial/SuperSerial-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SuperSerial/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SuperSerial/SuperSerial.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SuperSerial;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C01EF630E64421AA98B40F3DA028861D /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3681F25089EDC26BD46E5853BCE4B3CA /* Pods-DynUI_Tests.release.xcconfig */;
 			buildSettings = {
@@ -636,7 +950,7 @@
 			};
 			name = Release;
 		};
-		8B1E0B98315A6549D0837D3CF968F340 /* Debug */ = {
+		D54D639373143F9462F08F5F4E280B2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D6658507CE22F35F539A2CDBBE308BB7 /* DynUI.xcconfig */;
 			buildSettings = {
@@ -648,9 +962,9 @@
 			};
 			name = Debug;
 		};
-		9C055525081A495F7CD915DA8120C5BD /* Debug */ = {
+		D950D8A5F9C82456F809FA4119763667 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 29B66A1F8B948E123C953DC42368DECA /* Pods-DynUI_Example.debug.xcconfig */;
+			baseConfigurationReference = D6658507CE22F35F539A2CDBBE308BB7 /* DynUI.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -659,27 +973,23 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-DynUI_Example/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/DynUI/DynUI-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DynUI/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-DynUI_Example/Pods-DynUI_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods_DynUI_Example;
+				MODULEMAP_FILE = "Target Support Files/DynUI/DynUI.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = DynUI;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		9E0F6192BFDAD07493822919E02CAAC2 /* Debug */ = {
+		EDE5F7E9BBE7BDF76A9598599B7E0EA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7674CCFE55D181F4160B8C72F1D8165E /* Pods-DynUI_Tests.debug.xcconfig */;
 			buildSettings = {
@@ -710,37 +1020,27 @@
 			};
 			name = Debug;
 		};
-		BF8D7946586BFA1D8C5F64FAEA4EE19A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6658507CE22F35F539A2CDBBE308BB7 /* DynUI.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/DynUI/DynUI-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DynUI/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DynUI/DynUI.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = DynUI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		015E73326CB1497847DFDE0AACBFAFA4 /* Build configuration list for PBXNativeTarget "SuperSerial-SuperSerial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14FE3297EB61A6C953DC7DB393A53F14 /* Debug */,
+				7C054F5E458E041C2D341509CF5704E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		212FDF75FDB1214238F40735A4A32F91 /* Build configuration list for PBXNativeTarget "DynUI-DynUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D54D639373143F9462F08F5F4E280B2C /* Debug */,
+				3EDCCA1DB99AB8E6D4ED387F4D2CDD4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -750,38 +1050,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		53701537A85676740CB045CF7D85645F /* Build configuration list for PBXNativeTarget "DynUI" */ = {
+		5ABB4D5E819271462A17F532D5F78758 /* Build configuration list for PBXNativeTarget "SuperSerial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BF8D7946586BFA1D8C5F64FAEA4EE19A /* Debug */,
-				0006AEB5D191A7B14806EADEE9D6A3B1 /* Release */,
+				1753957F2B2F7A552A0ABA60D0808B7A /* Debug */,
+				94D399EE11B39D8567AD2CE1912F9749 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9A6732F8915138C43BB3CE678CD3CFA5 /* Build configuration list for PBXNativeTarget "Pods-DynUI_Example" */ = {
+		881AD79112453150C1A6E7CB04FE595E /* Build configuration list for PBXNativeTarget "Pods-DynUI_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9C055525081A495F7CD915DA8120C5BD /* Debug */,
-				0DF3F618FB0F0616592E349DF4CA356A /* Release */,
+				EDE5F7E9BBE7BDF76A9598599B7E0EA3 /* Debug */,
+				C01EF630E64421AA98B40F3DA028861D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BD10A5467C0F5C720C7AFD09DAD5B76C /* Build configuration list for PBXNativeTarget "DynUI-DynUI" */ = {
+		CC4A3F4BF8FC36F04E1DDF75AD65ACF4 /* Build configuration list for PBXNativeTarget "DynUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8B1E0B98315A6549D0837D3CF968F340 /* Debug */,
-				0AA9E1119DBF31C48AC8BC596885CB58 /* Release */,
+				4D6C8EEA525EE797466C56C1882DF028 /* Debug */,
+				D950D8A5F9C82456F809FA4119763667 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EF9B097645DD691A86881D0A23AEE60F /* Build configuration list for PBXNativeTarget "Pods-DynUI_Tests" */ = {
+		E0FB850CECA504A4A037E8CE16A66939 /* Build configuration list for PBXNativeTarget "Pods-DynUI_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9E0F6192BFDAD07493822919E02CAAC2 /* Debug */,
-				88126D547691C4949FBB3DB6403CDA0B /* Release */,
+				51C61C42CCA84C79A3FFE4496C5BC690 /* Debug */,
+				5FCDA74DA9CDACFE17C9EA1AAC63DBE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

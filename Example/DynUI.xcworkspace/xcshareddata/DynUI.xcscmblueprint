@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2A0F74C26D5ACB3FF61F228AA148DB76948BF213",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2A0F74C26D5ACB3FF61F228AA148DB76948BF213" : 0,
+    "9FE748D27DB9092AB720AEC5DA86947DC1F3A2B6" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A5A6E7F8-EEB1-4A6E-BF6B-30E368BFD1ED",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2A0F74C26D5ACB3FF61F228AA148DB76948BF213" : "DynUI\/",
+    "9FE748D27DB9092AB720AEC5DA86947DC1F3A2B6" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DynUI",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/DynUI.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/pourhadi\/DynUI.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2A0F74C26D5ACB3FF61F228AA148DB76948BF213"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/pourhadi\/DynUISwift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9FE748D27DB9092AB720AEC5DA86947DC1F3A2B6"
+    }
+  ]
+}

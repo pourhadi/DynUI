@@ -85,7 +85,9 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-DynUI_Tests/DynUI.framework"
+  install_framework "Pods-DynUI_Tests/SuperSerial.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-DynUI_Tests/DynUI.framework"
+  install_framework "Pods-DynUI_Tests/SuperSerial.framework"
 fi

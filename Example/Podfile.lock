@@ -1,14 +1,25 @@
 PODS:
-  - DynUI (0.1.0)
+  - DynUI (0.1.0):
+    - SuperSerial
+  - SuperSerial (0.1.1)
 
 DEPENDENCIES:
   - DynUI (from `../`)
+  - SuperSerial (from `https://github.com/pourhadi/SuperSerial.git`)
 
 EXTERNAL SOURCES:
   DynUI:
     :path: "../"
+  SuperSerial:
+    :git: https://github.com/pourhadi/SuperSerial.git
+
+CHECKOUT OPTIONS:
+  SuperSerial:
+    :commit: 4d9ed2a32ca1488631de50f88dc37cf49f75013e
+    :git: https://github.com/pourhadi/SuperSerial.git
 
 SPEC CHECKSUMS:
-  DynUI: abbb21ebf0c0f49d7f7833bad9dcffebadb04372
+  DynUI: a56d034459c22c02f69a34f95808db34f350d94a
+  SuperSerial: bea24b9becf8c50e50e199e7a15ad6f985cdfbc7
 
 COCOAPODS: 0.39.0

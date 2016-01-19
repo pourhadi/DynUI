@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F41C9794FA7BF86FB0EEEEB1'
+               BlueprintIdentifier = '8F975D1D8D3CF17EF1628126'
                BlueprintName = 'DynUI'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'DynUI.framework'>

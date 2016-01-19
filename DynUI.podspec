@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DynUI"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "A short description of DynUI."
 
 # This description is used to generate tags and improve search results.
@@ -19,12 +19,10 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/DynUI"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/pourhadi/DynUI"
   s.license          = 'MIT'
-  s.author           = { "Daniel Pourhadi" => "dan.p@akta.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/DynUI.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { "Daniel Pourhadi" => "dan@pourhadi.com" }
+  s.source           = { :git => "https://github.com/pourhadi/DynUI.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
@@ -35,6 +33,6 @@ Pod::Spec.new do |s|
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  # s.frameworks = 'UIKit'
+   s.dependency 'SuperSerial'
 end
