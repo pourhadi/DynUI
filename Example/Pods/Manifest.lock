@@ -1,25 +1,31 @@
 PODS:
-  - DynUI (0.1.0):
+  - DynUI (0.1.1):
+    - RxBlocking (~> 2.0)
+    - RxCocoa (~> 2.0)
+    - RxSwift (~> 2.0)
     - SuperSerial
-  - SuperSerial (0.1.1)
+  - RxBlocking (2.1.0):
+    - RxSwift (~> 2.0)
+  - RxCocoa (2.1.0):
+    - RxSwift (~> 2.0)
+  - RxSwift (2.1.0)
+  - SuperSerial (0.1.8)
 
 DEPENDENCIES:
   - DynUI (from `../`)
-  - SuperSerial (from `https://github.com/pourhadi/SuperSerial.git`)
+  - SuperSerial (from `/Users/danpourhadi/Projects/SuperSerial`)
 
 EXTERNAL SOURCES:
   DynUI:
     :path: "../"
   SuperSerial:
-    :git: https://github.com/pourhadi/SuperSerial.git
-
-CHECKOUT OPTIONS:
-  SuperSerial:
-    :commit: 4d9ed2a32ca1488631de50f88dc37cf49f75013e
-    :git: https://github.com/pourhadi/SuperSerial.git
+    :path: "/Users/danpourhadi/Projects/SuperSerial"
 
 SPEC CHECKSUMS:
-  DynUI: a56d034459c22c02f69a34f95808db34f350d94a
-  SuperSerial: bea24b9becf8c50e50e199e7a15ad6f985cdfbc7
+  DynUI: f8e9a413e9f66c87e396f7be01276d3c06470dcb
+  RxBlocking: fa297def258d85c5beae9ed507f94645260b3747
+  RxCocoa: 79b5feb8378545336e756a0a33fcf5e95050b71c
+  RxSwift: 110fb07f81c17c2c3b3254d168363057b1880d18
+  SuperSerial: 880e45ab50f0efbc5397fa2aa79bb86d8827c875
 
 COCOAPODS: 0.39.0

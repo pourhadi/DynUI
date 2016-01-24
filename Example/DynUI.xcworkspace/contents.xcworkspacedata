@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:DynUIPlayground.playground">
+   </FileRef>
+   <FileRef
       location = "group:DynUI.xcodeproj">
    </FileRef>
    <FileRef

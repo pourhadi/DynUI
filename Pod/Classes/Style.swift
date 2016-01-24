@@ -7,152 +7,226 @@
 //
 
 import Foundation
+import SuperSerial
+import QuartzCore
+import CoreGraphics
 
-protocol Style {
+public protocol Style {
     var name:String { get }
+}
+
+public struct ViewDrawingStyle : Style, Renderable {
+    public var name:String
+    
+    var backgroundStyle:Fill?
+    
+    var borders:[Border]?
+    
+    var innerShadow:Shadow?
+    var outerShadow:Shadow?
+    
+    public func render(context:RenderContext) {}
+    public var renderPriority = 0
+    public var prepFunction:RenderPrepFunction? = nil
+}
+
+public struct DrawingStyle : Style, Renderable {
+    public var name:String
+    public var clipsToBounds:Bool = false
+    public var rendersAsynchronously:Bool = false
+    public let attributes:[DrawingStyleAttribute]
+    
+    public func render(context:RenderContext) {
+        for attr in self.attributes.sort({ (attrL, attrR) -> Bool in
+            return attrL.renderPriority > attrR.renderPriority
+        }){
+            attr.render(context)
+        }
+    }
+    
+    public var prepFunction:RenderPrepFunction? {
+        return { context in
+            for attr in self.attributes {
+                if let function = attr.prepFunction {
+                    function(context: context)
+                }
+            }
+        }
+    }
+    
+    public init(name:String, attributes:[DrawingStyleAttribute]) {
+        self.name = name
+        self.attributes = attributes
+    }
+    public var renderPriority = 0
+}
+
+public struct TextStyle : Style {
+    public var attributes:TextStyleAttribute
+    public var name:String
 }
 
 public protocol StyleAttribute {}
 
-public protocol DrawingStyleAttribute:StyleAttribute {
-    func draw(inRect:CGRect, inContext:CGContextRef)
-}
-
-public enum Fill:DrawingStyleAttribute {
-    case Solid(ColorStyleAttribute)
-    case Gradient(colors:[ColorStyleAttribute], locations:[CGPoint])
-    case Blur(UIBlurEffectStyle)
+public struct RenderContext {
+    let rect:CGRect?
+    let context:CGContextRef?
+    weak var view:UIView?
     
-    public func draw(inRect: CGRect, inContext:CGContextRef) {}
+    var clipsToBounds = false
+    var isAsynchronous = false
+    var parameters:[String:AnyObject]?
 }
 
-//extension Fill:Serializable {
-//    func serialize() -> [String : String] {
-//        switch self {
-//        case .Solid(let attr): return "solid:\(attr.serialize())"
-//        }
-//    }
-//    
-//    init(fromDictionary: [String : String]) {
-//        
-//    }
-//}
+public typealias RenderPrepFunction = ((context:RenderContext)->Void)
+public protocol Renderable {
+    var renderPriority:Int { get }
+    var prepFunction:RenderPrepFunction? { get }
+    func render(context:RenderContext)
+}
+
+public protocol DrawingStyleAttribute:StyleAttribute, Renderable {}
+
+public struct Fill: DrawingStyleAttribute {
+    public var renderPriority = 1
+    public var prepFunction:RenderPrepFunction? = nil
+    let fillStyle:FillStyleAttribute
+    public func render(context:RenderContext) { self.fillStyle.render(context) }
+    
+    public init(fillStyle:FillStyleAttribute) {
+        self.fillStyle = fillStyle
+    }
+}
 
 public struct Border:DrawingStyleAttribute {
+    public enum BorderType {
+        case OuterStroke
+        case InnerTop
+        case InnerLeft
+        case InnerBottom
+        case InnerRight
+    }
+    
+    public var renderPriority = 0
     let width:CGFloat
-    let color:ColorStyleAttribute
+    let color:Color
+    let borderType:BorderType
     
-    let roundedCorners:UIRectCorner
-    let cornerRadius:CGFloat
+    public init(width:CGFloat, color:Color, borderType:BorderType) {
+        self.width = width
+        self.color = color
+        self.borderType = borderType
+    }
     
-    public func draw(inRect: CGRect, inContext:CGContextRef) {}
+    public func render(context:RenderContext) {
+//        if let v = context.view, rect = context.rect {
+//            let image = UIImage.drawImage(rect.insetBy(dx: -self.width/2, dy: -self.width/2).size, withBlock: { (drawRect) -> Void in
+//                let b = UIBezierPath(roundedRect: rect.centeredIn(drawRect), byRoundingCorners: self.roundedCorners, cornerRadii: CGSizeMake(self.cornerRadius, self.cornerRadius))
+//                let c = UIGraphicsGetCurrentContext()
+//                CGContextSetLineWidth(c, self.width)
+//                CGContextSetStrokeColorWithColor(c, self.color.color.CGColor)
+//                CGContextAddPath(c, b.CGPath)
+//                CGContextStrokePath(c)
+//            })
+//            if context.isAsynchronous {
+//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                    v.dyn_overlayView.image = image
+//                    v.dyn_overlayView.contentMode = .Center
+//                })
+//            } else {
+//                v.dyn_overlayView.image = image
+//                v.dyn_overlayView.contentMode = .Center
+//            }
+//        } else if let c = context.context, rect = context.rect {
+//            let b = UIBezierPath(roundedRect: rect.insetBy(dx: self.width/2, dy: self.width/2), byRoundingCorners: self.roundedCorners, cornerRadii: CGSizeMake(self.cornerRadius, self.cornerRadius))
+//            CGContextSetLineWidth(c, self.width)
+//            CGContextSetStrokeColorWithColor(c, self.color.color.CGColor)
+//            CGContextAddPath(c, b.CGPath)
+//            CGContextStrokePath(c)
+//        }
+    }
+    
+    public var prepFunction:RenderPrepFunction? = nil
 }
 
 public struct Shadow:DrawingStyleAttribute {
+    public var renderPriority = 0
+
     let radius:CGFloat
-    let color:ColorStyleAttribute
+    let color:Color
     let offset:CGSize
     
-    public func draw(inRect: CGRect, inContext:CGContextRef) {}
+    public func render(context:RenderContext) {
+        
+    }
+    public var prepFunction:RenderPrepFunction? = nil
 }
 
-public struct Text:StyleAttribute {}
+extension Shadow:AutoSerializable {
+    public init?(withValuesForKeys:[String:Serializable]) {
+        self.radius = withValuesForKeys["radius"] as! CGFloat
+        self.color = withValuesForKeys["color"] as! Color
+        self.offset = withValuesForKeys["offset"] as! CGSize
+    }
+}
+
+public struct TextStyleAttribute:StyleAttribute {}
 
 public struct InvalidStyle:StyleAttribute {}
 
-//
-// *****
-//
+public protocol FillStyleAttribute: Renderable {}
 
-public struct ColorStyleAttribute:DrawingStyleAttribute {
+public struct Color:FillStyleAttribute {
     var name:String?
     
     var color:UIColor
-    public func draw(inRect: CGRect, inContext:CGContextRef) {}
+    public func render(context:RenderContext) {
+        self.color.set()
+        if let rect = context.rect, let c = context.context {
+            CGContextFillRect(c, rect)
+        }
+    }
+    
+    public init(color:UIColor) {
+        self.color = color
+    }
+    public var prepFunction:RenderPrepFunction? = nil
+    public var renderPriority = 0
 }
 
-extension ColorStyleAttribute:Serializable {
-    enum Keys:String {
-        case name
-        case color
-    }
-    
-    func serialize() -> Serialized {
-        var dict = [String:Serialized]()
-        if let name = self.name {
-            dict[Keys.name.rawValue] = Serialized.Str(name)
-        }
-        
-        dict[Keys.color.rawValue] = self.color.serialize()
-        return Serialized.Dict(dict)
-    }
-    
-    static func fromSerialized(serialized: Serialized) -> ColorStyleAttribute? {
-        var name:String?
-        var color:UIColor?
-        
-        switch serialized {
-        case .Dict(let dict):
-            if let serializedName = dict[Keys.name.rawValue] {
-                name = String.fromSerialized(serializedName)
-            }
-            
-            if let serializedColor = dict[Keys.color.rawValue] {
-                color = UIColor.fromSerialized(serializedColor)
-            }
-            return ColorStyleAttribute(name: name, color: color!)
-        default: return nil
-        }
+extension Color:AutoSerializable {
+    public init?(withValuesForKeys:[String:Serializable]) {
+        if let color = withValuesForKeys["color"] as? UIColor {
+            self.color = color
+        } else { self.color = UIColor() }
+        self.name = withValuesForKeys["name"] as? String
     }
 }
 
-//
-// *****
-//
-
-public struct GradientStyleAttribute:DrawingStyleAttribute {
+public struct Gradient:FillStyleAttribute {
     var name:String?
     
-    let colors:[ColorStyleAttribute]
-    let locations:[CGPoint]
+    let colors:[Color]
+    let locations:[CGFloat]
+    let startPoint:CGPoint
+    let endPoint:CGPoint
 
-    public func draw(inRect: CGRect, inContext:CGContextRef) {}
+    public func render(context:RenderContext) {
+        if let c = context.context {
+            let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), self.colors.map { $0.color.CGColor }, self.locations)
+            CGContextDrawLinearGradient(c, gradient, self.startPoint, self.endPoint, CGGradientDrawingOptions.DrawsAfterEndLocation)
+        }
+    }
+    public var prepFunction:RenderPrepFunction? = nil
+    public var renderPriority = 0
 }
 
-extension GradientStyleAttribute:Serializable {
-    enum Keys:String {
-        case name
-        case colors
-        case locations
+extension Gradient:AutoSerializable {
+    public init?(withValuesForKeys: [String : Serializable]) {
+        self.name = withValuesForKeys["name"] as? String
+        self.colors = withValuesForKeys["colors"] as! [Color]
+        self.locations = withValuesForKeys["locations"] as! [CGFloat]
+        self.startPoint = withValuesForKeys["startPoint"] as! CGPoint
+        self.endPoint = withValuesForKeys["endPoint"] as! CGPoint
     }
-    
-    func serialize() -> Serialized {
-        var dict = [String:Serialized]()
-        if let name = self.name {
-            dict[Keys.name.rawValue] = name.serialize()
-        }
-        
-        dict[Keys.colors.rawValue] = self.colors.serialize()
-        dict[Keys.locations.rawValue] = Serialized.Array(self.locations.map { $0.serialize() })
-        return Serialized.Dict(dict)
-    }
-    static func fromSerialized(serialized: Serialized) -> GradientStyleAttribute? {
-        var name:String?
-        var colors = [ColorStyleAttribute]()
-        var locations = [CGPoint]()
-        switch serialized {
-        case .Dict(let dict):
-            if let nameval = dict[Keys.name.rawValue] { name = String.fromSerialized(nameval) }
-            if let colorval = dict[Keys.colors.rawValue] {
-                colors = [ColorStyleAttribute].fromSerialized(colorval)!
-            }
-            if let locval = dict[Keys.locations.rawValue] {
-                locations = [CGPoint].fromSerialized(locval)!
-            }
-            
-            return GradientStyleAttribute(name: name, colors: colors, locations: locations)
-        default: return nil
-        }
-    }
-    
 }

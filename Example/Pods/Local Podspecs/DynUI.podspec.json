@@ -25,6 +25,15 @@
   "dependencies": {
     "SuperSerial": [
 
+    ],
+    "RxSwift": [
+      "~> 2.0"
+    ],
+    "RxCocoa": [
+      "~> 2.0"
+    ],
+    "RxBlocking": [
+      "~> 2.0"
     ]
   }
 }

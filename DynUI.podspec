@@ -34,5 +34,8 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit'
-s.dependency 'SuperSerial', :git => "https://github.com/pourhadi/SuperSerial.git"
+s.dependency 'SuperSerial'
+s.dependency 'RxSwift',    '~> 2.0'
+s.dependency 'RxCocoa',    '~> 2.0'
+s.dependency 'RxBlocking', '~> 2.0'
 end
