@@ -14,11 +14,11 @@ internal func log(logMessage: String, functionName: String = __FUNCTION__) {
 
 public class DynUI {
     
-    public static var drawingStyles = [DrawingStyle]()
+    public static var drawableStyles = [DrawableStyle]()
     
-    public class func drawingStyleForName(name:String) -> DrawingStyle? {
-        if let index = self.drawingStyles.indexOf({ $0.name == name }) {
-            return self.drawingStyles[index]
+    public class func drawableStyleForName(name:String) -> DrawableStyle? {
+        if let index = self.drawableStyles.indexOf({ $0.name == name }) {
+            return self.drawableStyles[index]
         }
         return nil
     }

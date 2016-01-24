@@ -39,7 +39,7 @@ private class ExtensionPropertyManager:NSObject {
     var dyn_properties = [String:Any?]()
 }
 
-extension UIView:Styleable {
+extension UIView {
     public var dyn_styleName:String? {
         get {
             return self.dyn_getProp("dyn_styleName")
@@ -88,18 +88,18 @@ extension UIView {
     }
     
     private func dyn_render() {
-        func render(style:DrawingStyle) -> UIImage {
+        func render(style:ViewStyle) -> UIImage {
             return UIImage.drawImage(self.bounds.size, withBlock: { (rect) -> Void in
-                let context = RenderContext.init(rect: self.bounds, context: UIGraphicsGetCurrentContext(), view: self, clipsToBounds: style.clipsToBounds, isAsynchronous:style.rendersAsynchronously, parameters: nil)
+                let context = RenderContext.init(rect: self.bounds, context: UIGraphicsGetCurrentContext(), view: self,  parameters: nil)
                 if let prep = style.prepFunction { prep(context: context) }
                 style.render(context)
             })
         }
         
         guard let styleName = self.dyn_styleName else { return }
-        guard let style = DynUI.drawingStyleForName(styleName) else { return }
+        guard let style = DynUI.drawableStyleForName(styleName) as? ViewStyle else { return }
         
-        if style.rendersAsynchronously {
+        if style.renderAsynchronously {
             dispatch_async(DynUI.renderQueue, { [weak self] () -> Void in
                 let image = render(style)
                 dispatch_async(dispatch_get_main_queue(), { [weak self] () -> Void in

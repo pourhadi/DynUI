@@ -15,7 +15,9 @@ public protocol Style {
     var name:String { get }
 }
 
-public struct ViewDrawingStyle : Style, Renderable {
+public protocol DrawableStyle: Style, Renderable {}
+
+public struct ViewStyle : DrawableStyle {
     public var name:String
     
     var backgroundStyle:Fill?
@@ -25,40 +27,11 @@ public struct ViewDrawingStyle : Style, Renderable {
     var innerShadow:Shadow?
     var outerShadow:Shadow?
     
+    var renderAsynchronously = false
+    
     public func render(context:RenderContext) {}
     public var renderPriority = 0
     public var prepFunction:RenderPrepFunction? = nil
-}
-
-public struct DrawingStyle : Style, Renderable {
-    public var name:String
-    public var clipsToBounds:Bool = false
-    public var rendersAsynchronously:Bool = false
-    public let attributes:[DrawingStyleAttribute]
-    
-    public func render(context:RenderContext) {
-        for attr in self.attributes.sort({ (attrL, attrR) -> Bool in
-            return attrL.renderPriority > attrR.renderPriority
-        }){
-            attr.render(context)
-        }
-    }
-    
-    public var prepFunction:RenderPrepFunction? {
-        return { context in
-            for attr in self.attributes {
-                if let function = attr.prepFunction {
-                    function(context: context)
-                }
-            }
-        }
-    }
-    
-    public init(name:String, attributes:[DrawingStyleAttribute]) {
-        self.name = name
-        self.attributes = attributes
-    }
-    public var renderPriority = 0
 }
 
 public struct TextStyle : Style {
@@ -72,9 +45,7 @@ public struct RenderContext {
     let rect:CGRect?
     let context:CGContextRef?
     weak var view:UIView?
-    
-    var clipsToBounds = false
-    var isAsynchronous = false
+
     var parameters:[String:AnyObject]?
 }
 
@@ -119,31 +90,6 @@ public struct Border:DrawingStyleAttribute {
     }
     
     public func render(context:RenderContext) {
-//        if let v = context.view, rect = context.rect {
-//            let image = UIImage.drawImage(rect.insetBy(dx: -self.width/2, dy: -self.width/2).size, withBlock: { (drawRect) -> Void in
-//                let b = UIBezierPath(roundedRect: rect.centeredIn(drawRect), byRoundingCorners: self.roundedCorners, cornerRadii: CGSizeMake(self.cornerRadius, self.cornerRadius))
-//                let c = UIGraphicsGetCurrentContext()
-//                CGContextSetLineWidth(c, self.width)
-//                CGContextSetStrokeColorWithColor(c, self.color.color.CGColor)
-//                CGContextAddPath(c, b.CGPath)
-//                CGContextStrokePath(c)
-//            })
-//            if context.isAsynchronous {
-//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                    v.dyn_overlayView.image = image
-//                    v.dyn_overlayView.contentMode = .Center
-//                })
-//            } else {
-//                v.dyn_overlayView.image = image
-//                v.dyn_overlayView.contentMode = .Center
-//            }
-//        } else if let c = context.context, rect = context.rect {
-//            let b = UIBezierPath(roundedRect: rect.insetBy(dx: self.width/2, dy: self.width/2), byRoundingCorners: self.roundedCorners, cornerRadii: CGSizeMake(self.cornerRadius, self.cornerRadius))
-//            CGContextSetLineWidth(c, self.width)
-//            CGContextSetStrokeColorWithColor(c, self.color.color.CGColor)
-//            CGContextAddPath(c, b.CGPath)
-//            CGContextStrokePath(c)
-//        }
     }
     
     public var prepFunction:RenderPrepFunction? = nil
