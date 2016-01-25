@@ -91,7 +91,6 @@ extension UIView {
         func render(style:ViewStyle) -> UIImage {
             return UIImage.drawImage(self.bounds.size, withBlock: { (rect) -> Void in
                 let context = RenderContext.init(rect: self.bounds, context: UIGraphicsGetCurrentContext(), view: self,  parameters: nil)
-                if let prep = style.prepFunction { prep(context: context) }
                 style.render(context)
             })
         }
