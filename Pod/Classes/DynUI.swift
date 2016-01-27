@@ -23,9 +23,9 @@ public class DynUI {
     }
     
     public static var textStyles = [TextStyle]()
-    public class func textStyleForName(name:String) -> TextStyle? {
-        if let index = self.textStyles.indexOf({ $0.name == name }) {
-            return self.textStyles[index]
+    public class func textStyleForName(value:(name:String, size:CGFloat)) -> TextStyle? {
+        if let index = self.textStyles.indexOf({ $0.name == value.name }) {
+            return self.textStyles[index].withSize(value.size)
         }
         return nil
     }

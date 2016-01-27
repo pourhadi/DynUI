@@ -165,30 +165,53 @@ internal class OverlayView: UIImageView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
 extension UILabel {
-    public var dyn_textStyleName:String? {
+    public var dyn_textStyle:(name:String, size:CGFloat)? {
         get {
             return self.dyn_getProp("dyn_textStyleName")
         }
         set {
             self.dyn_setProp(newValue, "dyn_textStyleName")
             
-            if let name = newValue {
-                if let style = DynUI.textStyleForName(name) {
+            if let t = newValue {
+                if let style = DynUI.textStyleForName(t) {
                     self.font = style.font
                     if let alignment = style.alignment { self.textAlignment = alignment }
                     if let color = style.color { self.textColor = color.color }
                     if let shadow = style.shadow {
                         self.shadowColor = shadow.color.color
                         self.shadowOffset = shadow.offset
-                    }                    
+                    }
                 }
             }
         }
     }
 }
 
+extension UIButton {
+    public var dyn_textStyle:(name:String, size:CGFloat)? {
+        get {
+            return self.titleLabel!.dyn_textStyle
+        }
+        set {
+            self.titleLabel!.dyn_textStyle = newValue
+        }
+    }
+}
 
+extension UITextField {
+    public var dyn_textStyle:(name:String, size:CGFloat)? {
+        get {
+            return self.dyn_getProp("dyn_textStyle")
+        }
+        set {
+            self.dyn_setProp(newValue, "dyn_textStyle")
+            guard let styleName = newValue else { return }
+            if let style = DynUI.textStyleForName(styleName) {
+                self.defaultTextAttributes = style.asAttributes()
+            }
+        }
+    }
+}

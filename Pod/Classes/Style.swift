@@ -69,8 +69,34 @@ public struct TextStyle : Style {
     public var color:Color?
     public var shadow:Shadow?
     
-    public func asAttributes() -> [String:AnyObject] { return [:] }
+    public func asAttributes() -> [String:AnyObject] {
+        var attributes = [String:AnyObject]()
+        attributes[NSFontAttributeName] = self.font
+        
+        if let alignment = self.alignment {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = alignment
+            attributes[NSParagraphStyleAttributeName] = paragraphStyle
+        }
+        
+        if let color = self.color {
+            attributes[NSForegroundColorAttributeName] = color.color
+        }
+        
+        if let shadow = self.shadow {
+            attributes[NSShadowAttributeName] = shadow.asNSShadow()
+        }
+        
+        return attributes
+    }
+    
     public func asCSS() -> String { return "" }
+    
+    public func withSize(size:CGFloat) -> TextStyle {
+        var new = self
+        new.font = self.font.fontWithSize(size)
+        return new
+    }
 }
 
 public protocol StyleAttribute {}
@@ -239,6 +265,14 @@ public struct Shadow:DrawingStyleAttribute {
     
     public func render(context:RenderContext) {
         
+    }
+    
+    public func asNSShadow() -> NSShadow {
+        let shadow = NSShadow()
+        shadow.shadowOffset = self.offset
+        shadow.shadowColor = self.color.color
+        shadow.shadowBlurRadius = self.radius
+        return shadow
     }
 }
 
