@@ -15,10 +15,17 @@ internal func log(logMessage: String, functionName: String = __FUNCTION__) {
 public class DynUI {
     
     public static var drawableStyles = [DrawableStyle]()
-    
     public class func drawableStyleForName(name:String) -> DrawableStyle? {
         if let index = self.drawableStyles.indexOf({ $0.name == name }) {
             return self.drawableStyles[index]
+        }
+        return nil
+    }
+    
+    public static var textStyles = [TextStyle]()
+    public class func textStyleForName(name:String) -> TextStyle? {
+        if let index = self.textStyles.indexOf({ $0.name == name }) {
+            return self.textStyles[index]
         }
         return nil
     }

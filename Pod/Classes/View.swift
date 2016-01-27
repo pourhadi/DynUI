@@ -168,4 +168,27 @@ internal class OverlayView: UIImageView {
 
 }
 
+extension UILabel {
+    public var dyn_textStyleName:String? {
+        get {
+            return self.dyn_getProp("dyn_textStyleName")
+        }
+        set {
+            self.dyn_setProp(newValue, "dyn_textStyleName")
+            
+            if let name = newValue {
+                if let style = DynUI.textStyleForName(name) {
+                    self.font = style.font
+                    if let alignment = style.alignment { self.textAlignment = alignment }
+                    if let color = style.color { self.textColor = color.color }
+                    if let shadow = style.shadow {
+                        self.shadowColor = shadow.color.color
+                        self.shadowOffset = shadow.offset
+                    }                    
+                }
+            }
+        }
+    }
+}
+
 

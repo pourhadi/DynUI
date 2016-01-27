@@ -20,17 +20,17 @@ public protocol DrawableStyle: Style, Renderable {}
 public struct ViewStyle : DrawableStyle {
     public var name:String
     
-    var backgroundStyle:Fill?
+    public var backgroundStyle:Fill?
     
-    var borders:[Border] = []
+    public var borders:[Border] = []
     
-    var roundedCorners:UIRectCorner = []
-    var cornerRadius:CGFloat = 0
+    public var roundedCorners:UIRectCorner = []
+    public var cornerRadius:CGFloat = 0
     
-    var innerShadow:Shadow?
-    var outerShadow:Shadow?
+    public var innerShadow:Shadow?
+    public var outerShadow:Shadow?
     
-    var renderAsynchronously = false
+    public var renderAsynchronously = false
     
     public func render(var context:RenderContext) {
         if let rect = context.rect {
@@ -56,11 +56,21 @@ public struct ViewStyle : DrawableStyle {
             }
         }
     }
+    
+    public init(name:String) { self.name = name }
 }
 
 public struct TextStyle : Style {
-    public var attributes:TextStyleAttribute
     public var name:String
+    
+    public var font:UIFont
+    
+    public var alignment:NSTextAlignment?
+    public var color:Color?
+    public var shadow:Shadow?
+    
+    public func asAttributes() -> [String:AnyObject] { return [:] }
+    public func asCSS() -> String { return "" }
 }
 
 public protocol StyleAttribute {}
@@ -257,6 +267,10 @@ public struct Color:FillStyleAttribute {
         }
     }
     
+    public init(_ color:UIColor) {
+        self.color = color
+    }
+    
     public init(color:UIColor) {
         self.color = color
     }
@@ -268,6 +282,12 @@ extension Color:AutoSerializable {
             self.color = color
         } else { self.color = UIColor() }
         self.name = withValuesForKeys["name"] as? String
+    }
+}
+
+extension UIColor {
+    public func dyn_color() -> Color {
+        return Color(color: self)
     }
 }
 
