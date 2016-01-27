@@ -11,14 +11,22 @@ import SuperSerial
 import QuartzCore
 import CoreGraphics
 
+public protocol StyleNaming {
+    var styleName:String { get }
+}
+
+extension String: StyleNaming {
+    public var styleName:String { return self }
+}
+
 public protocol Style {
-    var name:String { get }
+    var name:StyleNaming { get }
 }
 
 public protocol DrawableStyle: Style, Renderable {}
 
 public struct ViewStyle : DrawableStyle {
-    public var name:String
+    public var name:StyleNaming
     
     public var backgroundStyle:Fill?
     
@@ -57,11 +65,11 @@ public struct ViewStyle : DrawableStyle {
         }
     }
     
-    public init(name:String) { self.name = name }
+    public init(name:StyleNaming) { self.name = name }
 }
 
 public struct TextStyle : Style {
-    public var name:String
+    public var name:StyleNaming
     
     public var font:UIFont
     
@@ -291,7 +299,7 @@ public struct InvalidStyle:StyleAttribute {}
 public protocol FillStyleAttribute: Renderable {}
 
 public struct Color:FillStyleAttribute {
-    var name:String?
+    var name:StyleNaming?
     
     var color:UIColor
     public func render(context:RenderContext) {
@@ -326,7 +334,7 @@ extension UIColor {
 }
 
 public struct Gradient:FillStyleAttribute {
-    var name:String?
+    var name:StyleNaming?
     
     let colors:[Color]
     let locations:[CGFloat]

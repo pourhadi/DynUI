@@ -168,7 +168,7 @@ internal class OverlayView: UIImageView {
 }
 
 extension UILabel {
-    public var dyn_textStyle:(name:String, size:CGFloat)? {
+    public var dyn_textStyle:(name:StyleNaming, size:CGFloat)? {
         get {
             return self.dyn_getProp("dyn_textStyleName")
         }
@@ -191,7 +191,7 @@ extension UILabel {
 }
 
 extension UIButton {
-    public var dyn_textStyle:(name:String, size:CGFloat)? {
+    public var dyn_textStyle:(name:StyleNaming, size:CGFloat)? {
         get {
             return self.titleLabel!.dyn_textStyle
         }
@@ -202,7 +202,7 @@ extension UIButton {
 }
 
 extension UITextField {
-    public var dyn_textStyle:(name:String, size:CGFloat)? {
+    public var dyn_textStyle:(name:StyleNaming, size:CGFloat)? {
         get {
             return self.dyn_getProp("dyn_textStyle")
         }
