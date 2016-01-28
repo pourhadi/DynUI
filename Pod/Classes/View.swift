@@ -40,7 +40,7 @@ private class ExtensionPropertyManager:NSObject {
 }
 
 extension UIView {
-    public var dyn_styleName:String? {
+    public var dyn_styleName:StyleNaming? {
         get {
             return self.dyn_getProp("dyn_styleName")
         }
@@ -62,23 +62,20 @@ extension UIView {
     }
     
     private func dyn_setup() {
-        guard let _ = self.superview where self.dyn_disposeBag == nil else { return }
+        guard self.dyn_disposeBag == nil else { return }
         self.dyn_disposeBag = DisposeBag()
         
-        self.rx_observe(UIView.self, "superview").subscribeNext({ [weak self] (superview) -> Void in
-            if let _ = superview {
-                self?.dyn_setup()
-            } else { self?.dyn_teardown() }
-        }).addDisposableTo(self.dyn_disposeBag!)
-        
+        log(self.dyn_disposeBag == nil ? "dispose bag nil" : "dispose bag not nil")
+
         var lastRecordedFrame:CGRect? = CGRectZero
-        self.rx_observe(CGRect.self, "frame").subscribeNext({ [weak self] (rect) -> Void in
+        self.dyn_disposeBag?.addDisposable(self.rx_observe(CGRect.self, "layer.bounds").subscribeNext({ [weak self] (rect) -> Void in
+            log("inside frame observer - \(rect)")
+
             if rect != lastRecordedFrame {
                 lastRecordedFrame = rect
-                
                 self?.dyn_render()
             }
-        }).addDisposableTo(self.dyn_disposeBag!)
+        }))
     }
     
     private func dyn_teardown() {
@@ -90,11 +87,13 @@ extension UIView {
     private func dyn_render() {
         func render(style:ViewStyle) -> UIImage {
             return UIImage.drawImage(self.bounds.size, withBlock: { (rect) -> Void in
-                let context = RenderContext.init(rect: self.bounds, context: UIGraphicsGetCurrentContext(), view: self,  parameters: nil)
+                let context = RenderContext.init(rect: self.bounds, view: self,  parameters: nil)
                 style.render(context)
             })
         }
         
+        log("\(self.dyn_styleName)")
+        log("\(DynUI.drawableStyles)")
         guard let styleName = self.dyn_styleName else { return }
         guard let style = DynUI.drawableStyleForName(styleName) as? ViewStyle else { return }
         
@@ -167,7 +166,11 @@ internal class OverlayView: UIImageView {
     }
 }
 
-extension UILabel {
+public protocol TextStyleable: class {
+    var dyn_textStyle:(name:StyleNaming, size:CGFloat)? { get set }
+}
+
+extension UILabel: TextStyleable {
     public var dyn_textStyle:(name:StyleNaming, size:CGFloat)? {
         get {
             return self.dyn_getProp("dyn_textStyleName")
@@ -190,7 +193,7 @@ extension UILabel {
     }
 }
 
-extension UIButton {
+extension UIButton: TextStyleable {
     public var dyn_textStyle:(name:StyleNaming, size:CGFloat)? {
         get {
             return self.titleLabel!.dyn_textStyle
@@ -201,7 +204,7 @@ extension UIButton {
     }
 }
 
-extension UITextField {
+extension UITextField: TextStyleable {
     public var dyn_textStyle:(name:StyleNaming, size:CGFloat)? {
         get {
             return self.dyn_getProp("dyn_textStyle")

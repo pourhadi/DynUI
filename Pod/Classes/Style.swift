@@ -45,6 +45,20 @@ public struct ViewStyle : DrawableStyle {
             let bez = UIBezierPath(roundedRect: rect, byRoundingCorners: self.roundedCorners, cornerRadii: CGSizeMake(self.cornerRadius, self.cornerRadius))
             bez.addClip()
             
+            if let v = context.view {
+                let mask = CAShapeLayer()
+                mask.frame = v.bounds
+                mask.path = bez.CGPath
+                
+                if self.renderAsynchronously {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        v.layer.mask = mask
+                    })
+                } else {
+                    v.layer.mask = mask
+                }
+            }
+
             context.setParentStyle(self)
             
             if let bg = self.backgroundStyle {
@@ -105,22 +119,26 @@ public struct TextStyle : Style {
         new.font = self.font.fontWithSize(size)
         return new
     }
+    
+    public init(_ name:StyleNaming, _ font:UIFont, _ color: Color = Color(UIColor.blackColor())) {
+        self.font = font
+        self.name = name
+    }
 }
 
 public protocol StyleAttribute {}
 
 public struct RenderContext {
     let rect:CGRect?
-    let context:CGContextRef?
+    var context:CGContextRef? { return UIGraphicsGetCurrentContext() }
     weak var view:UIView?
 
     var parameters:[String:AnyObject]?
     
     private var parentStyle:Style?
 
-    init(rect:CGRect?, context:CGContextRef?, view:UIView?, parameters:[String:AnyObject]? = nil) {
+    init(rect:CGRect?, view:UIView?, parameters:[String:AnyObject]? = nil) {
         self.rect = rect
-        self.context = context
         self.view = view
         self.parameters = parameters
     }
@@ -282,6 +300,12 @@ public struct Shadow:DrawingStyleAttribute {
         shadow.shadowBlurRadius = self.radius
         return shadow
     }
+    
+    public init(radius:CGFloat, color:Color, offset:CGSize) {
+        self.radius = radius
+        self.color = color
+        self.offset = offset
+    }
 }
 
 extension Shadow:AutoSerializable {
@@ -300,8 +324,20 @@ public protocol FillStyleAttribute: Renderable {}
 
 public struct Color:FillStyleAttribute {
     var name:StyleNaming?
+    var alpha:CGFloat = 1
     
-    var color:UIColor
+    private var _color:UIColor?
+    public var color:UIColor {
+        if let color = _color {
+            return color.colorWithAlphaComponent(self.alpha)
+        }
+        
+        if let name = self.name {
+            if let found = DynUI.colorForName(name) { return found.color.colorWithAlphaComponent(self.alpha) }
+        }
+        return UIColor()
+    }
+    
     public func render(context:RenderContext) {
         self.color.set()
         if let rect = context.rect, let c = context.context {
@@ -310,20 +346,35 @@ public struct Color:FillStyleAttribute {
     }
     
     public init(_ color:UIColor) {
-        self.color = color
+        _color = color
     }
     
     public init(color:UIColor) {
-        self.color = color
+        _color = color
     }
+    
+    public init(name:StyleNaming) {
+        self.name = name
+    }
+    
+    public init(_ name:StyleNaming, alpha:CGFloat = 1) {
+        self.name = name
+        self.alpha = alpha
+    }
+    
+    public init(withHexAsName:String) {
+        _color = UIColor(rgba: withHexAsName)
+        self.name = withHexAsName
+    }
+    
 }
 
 extension Color:AutoSerializable {
     public init?(withValuesForKeys:[String:Serializable]) {
         if let color = withValuesForKeys["color"] as? UIColor {
-            self.color = color
-        } else { self.color = UIColor() }
-        self.name = withValuesForKeys["name"] as? String
+            _color = color
+        } else { _color = nil }
+        self.name = withValuesForKeys["name"] as? StyleNaming
     }
 }
 
@@ -341,10 +392,25 @@ public struct Gradient:FillStyleAttribute {
     let startPoint:CGPoint
     let endPoint:CGPoint
 
+    public init(colors:[Color], locations:[CGFloat], startPoint:CGPoint, endPoint:CGPoint) {
+        self.colors = colors
+        self.locations = locations
+        self.startPoint = startPoint
+        self.endPoint = endPoint
+    }
+    
     public func render(context:RenderContext) {
-        if let c = context.context {
+        log("gradient render")
+        if let c = context.context, r = context.rect {
+            CGContextSaveGState(c)
+            CGContextTranslateCTM(c, 0, r.size.height)
+            CGContextScaleCTM(c, 1.0, -1.0)
             let gradient = CGGradientCreateWithColors(CGColorSpaceCreateDeviceRGB(), self.colors.map { $0.color.CGColor }, self.locations)
-            CGContextDrawLinearGradient(c, gradient, self.startPoint, self.endPoint, CGGradientDrawingOptions.DrawsAfterEndLocation)
+            
+            let start = CGPointMake(self.startPoint.x * r.size.width, self.startPoint.y * r.size.height)
+            let end = CGPointMake(self.endPoint.x * r.size.width, self.endPoint.y * r.size.height)
+            CGContextDrawLinearGradient(c, gradient, start, end, CGGradientDrawingOptions.DrawsAfterEndLocation)
+            CGContextRestoreGState(c)
         }
     }
 }
