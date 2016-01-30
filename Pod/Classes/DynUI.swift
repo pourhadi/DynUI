@@ -14,7 +14,7 @@ internal func log(logMessage: String = "", _ functionName: String = __FUNCTION__
 
 public class DynUI {
     
-    public static var loggingEnabled:Bool = true
+    public static var loggingEnabled:Bool = false
     
     public class func initialize(colors:[Color] = [], drawableStyles:[DrawableStyle] = [], textStyles:[TextStyle] = []) {
         _colors = colors
@@ -42,6 +42,13 @@ public class DynUI {
     public class func textStyleForName(value:(name:StyleNaming, size:CGFloat)) -> TextStyle? {
         if let index = self.textStyles.indexOf({ $0.name.styleName == value.name.styleName }) {
             return self.textStyles[index].withSize(value.size)
+        }
+        return nil
+    }
+    
+    public class func textStyleForName(name:StyleNaming) -> TextStyle? {
+        if let index = self.textStyles.indexOf({ $0.name.styleName == name.styleName }) {
+            return self.textStyles[index]
         }
         return nil
     }

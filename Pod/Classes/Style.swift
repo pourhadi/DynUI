@@ -26,37 +26,80 @@ public protocol Style {
 public protocol DrawableStyle: Style, Renderable {}
 
 public struct ViewStyle : DrawableStyle {
+    private var savedStyle:ViewStyle? {
+        if self.originality == .Saved {
+            return DynUI.drawableStyleForName(self.name) as? ViewStyle
+        }
+        return nil
+    }
+    
+    private let originality:StyleOriginality
     public var name:StyleNaming
     
-    public var backgroundStyle:Fill?
+    private var _backgroundStyle:Fill?
+    public var backgroundStyle:Fill? {
+        set { _backgroundStyle = newValue }
+        get {
+            if let style = _backgroundStyle { return style }
+            else { if let style = self.savedStyle { return style.backgroundStyle } else { return nil } }
+        }}
     
-    public var borders:[Border] = []
+    private var _borders:[Border]?
+    public var borders:[Border] {
+            set { _borders = newValue }
+            get {
+                if let borders = _borders { return borders }
+                else { if let style = self.savedStyle { return style.borders } else { return [] } }
+            }}
     
-    public var roundedCorners:UIRectCorner = []
-    public var cornerRadius:CGFloat = 0
+    private var _roundedCorners:UIRectCorner?
+    public var roundedCorners:UIRectCorner {
+        set { _roundedCorners = newValue }
+        get {
+            if let corners = _roundedCorners { return corners }
+            else { if let style = self.savedStyle { return style.roundedCorners } else { return [] } }
+        }}
+    
+    private var _cornerRadius:CGFloat?
+    public var cornerRadius:CGFloat {
+        set { _cornerRadius = newValue }
+        get {
+            if let radius = _cornerRadius { return radius }
+            else { if let style = self.savedStyle { return style.cornerRadius } else { return 0 } }
+        }}
     
     public var innerShadow:Shadow?
     public var outerShadow:Shadow?
     
-    public var renderAsynchronously = false
+    public var mask:Bool = false
+    
+    public var renderInset:UIEdgeInsets = UIEdgeInsetsZero
     
     public func render(var context:RenderContext) {
         if let rect = context.rect {
-            let bez = UIBezierPath(roundedRect: rect, byRoundingCorners: self.roundedCorners, cornerRadii: CGSizeMake(self.cornerRadius, self.cornerRadius))
+            let bez:UIBezierPath
+            
+            if let path = context.path {
+                bez = path
+            } else {
+                var newRect = rect
+                newRect.origin.x += self.renderInset.left
+                newRect.size.width -= self.renderInset.left
+                newRect.origin.y += self.renderInset.top
+                newRect.size.height -= self.renderInset.top
+                newRect.size.width -= self.renderInset.right
+                newRect.size.height -= self.renderInset.bottom
+                context.rect = newRect
+                bez = UIBezierPath(roundedRect: newRect, byRoundingCorners: self.roundedCorners, cornerRadii: CGSizeMake(self.cornerRadius, self.cornerRadius))
+            }
+            
             bez.addClip()
             
-            if let v = context.view {
+            if let v = context.view where self.mask == true {
                 let mask = CAShapeLayer()
                 mask.frame = v.bounds
                 mask.path = bez.CGPath
-                
-                if self.renderAsynchronously {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        v.layer.mask = mask
-                    })
-                } else {
-                    v.layer.mask = mask
-                }
+                v.layer.mask = mask
             }
 
             context.setParentStyle(self)
@@ -79,17 +122,133 @@ public struct ViewStyle : DrawableStyle {
         }
     }
     
+    public init(name:StyleNaming) {
+        self.init(newWithName:name)
+    }
+    
+    public init(newWithName:StyleNaming) {
+        self.originality = .New
+        self.name = newWithName
+    }
+    
+    public init(savedWithName:StyleNaming) {
+        self.originality = .Saved
+        self.name = savedWithName
+    }
+}
+
+extension ViewStyle {
+    public func withBorders(borders:[Border]) -> ViewStyle {
+        var new = self
+        new.borders = borders
+        return new
+    }
+}
+
+public struct ButtonStyle: DrawableStyle {
     public init(name:StyleNaming) { self.name = name }
+    public var name:StyleNaming
+
+    public var viewStyle:StyleNaming?
+    public var highlightedViewStyle:StyleNaming?
+    
+    public var textStyle:TextStyle?
+    public var highlightedTextStyle:TextStyle?
+    
+    public func render(context:RenderContext) { }
+}
+
+internal enum StyleOriginality:Int {
+    case New
+    case Saved
 }
 
 public struct TextStyle : Style {
+    internal let originality:StyleOriginality
     public var name:StyleNaming
     
-    public var font:UIFont
+    private var savedStyle:TextStyle? {
+        if self.originality == .Saved {
+            return DynUI.textStyleForName(self.name)
+        }
+        return nil
+    }
     
-    public var alignment:NSTextAlignment?
-    public var color:Color?
-    public var shadow:Shadow?
+    private var _font:UIFont?
+    public var font:UIFont {
+        set {
+            self._font = newValue
+        }
+        get {
+            if let font = self._font {
+                if self._size > 0 {
+                    return font.fontWithSize(self._size)
+                } else { return font }
+            }
+            if let style = self.savedStyle {
+                if self._size > 0 {
+                    return style.font.fontWithSize(self._size)
+                } else { return style.font }
+            }
+            return UIFont()
+        }
+    }
+    
+    private var _alignment:NSTextAlignment?
+    public var alignment:NSTextAlignment? {
+        set {
+            self._alignment = newValue
+        }
+        get {
+            if let alignment = self._alignment { return alignment }
+            if let style = self.savedStyle {
+                return style.alignment
+            }
+            return nil
+        }
+    }
+    
+    private var _color:Color?
+    public var color:Color? {
+        set {
+            self._color = newValue
+        }
+        get {
+            if let color = self._color { return color }
+            if let style = self.savedStyle {
+                return style.color
+            }
+            return nil
+        }
+    }
+    
+    private var _shadow:Shadow?
+    public var shadow:Shadow? {
+        set {
+            self._shadow = newValue
+        }
+        get {
+            if let shadow = self._shadow { return shadow }
+            if let style = self.savedStyle {
+                return style.shadow
+            }
+            return nil
+        }
+    }
+    
+    private var _highlightedTextColor:Color?
+    public var highlightedTextColor:Color? {
+        set {
+            self._highlightedTextColor = newValue
+        }
+        get {
+            if let color = self._highlightedTextColor { return color }
+            if let style = self.savedStyle {
+                return style.highlightedTextColor
+            }
+            return nil
+        }
+    }
     
     public func asAttributes() -> [String:AnyObject] {
         var attributes = [String:AnyObject]()
@@ -114,25 +273,63 @@ public struct TextStyle : Style {
     
     public func asCSS() -> String { return "" }
     
+    public init(newStyleNamed name:StyleNaming, _ font:UIFont, _ color: Color = Color(UIColor.blackColor())) {
+        self.originality = .New
+        self._font = font
+        self._size = font.pointSize
+        self.name = name
+        self.color = color
+    }
+    
+    private var _size:CGFloat = 0
+    public init(_ savedStyleNamed:StyleNaming, _ size:CGFloat = 0) {
+        self.originality = .Saved
+        self.name = savedStyleNamed
+        self._size = size
+    }
+}
+
+extension TextStyle {
     public func withSize(size:CGFloat) -> TextStyle {
         var new = self
-        new.font = self.font.fontWithSize(size)
+        new._size = size
         return new
     }
     
-    public init(_ name:StyleNaming, _ font:UIFont, _ color: Color = Color(UIColor.blackColor())) {
-        self.font = font
-        self.name = name
+    public func withColor(color:Color) -> TextStyle {
+        var new = self
+        new.color = color
+        return new
+    }
+    
+    public func withShadow(shadow:Shadow) -> TextStyle {
+        var new = self
+        new.shadow = shadow
+        return new
+    }
+    
+    public func withAlignment(alignment:NSTextAlignment) -> TextStyle {
+        var new = self
+        new.alignment = alignment
+        return new
+    }
+    
+    public func withHighlightedTextColor(color:Color) -> TextStyle {
+        var new = self
+        new.highlightedTextColor = color
+        return new
     }
 }
 
 public protocol StyleAttribute {}
 
 public struct RenderContext {
-    let rect:CGRect?
+    var rect:CGRect?
     var context:CGContextRef? { return UIGraphicsGetCurrentContext() }
     weak var view:UIView?
 
+    var path:UIBezierPath?
+    
     var parameters:[String:AnyObject]?
     
     private var parentStyle:Style?
@@ -141,6 +338,13 @@ public struct RenderContext {
         self.rect = rect
         self.view = view
         self.parameters = parameters
+    }
+    
+    init(path:UIBezierPath, view:UIView?) {
+        self.path = path
+        self.rect = path.bounds
+        self.view = view
+        self.parameters = nil
     }
     
     private mutating func setParentStyle<T:Style>(parentStyle:T) {
@@ -202,22 +406,21 @@ public struct Border:DrawingStyleAttribute {
     private func addOuterStroke(context:RenderContext) {
         if let v = context.view, style = context.getParentStyle() as ViewStyle?, rect = context.rect {
             let image = UIImage.drawImage(rect.insetBy(dx: -self.width/2, dy: -self.width/2).size, withBlock: { (drawRect) -> Void in
-                let b = UIBezierPath(roundedRect: rect.centeredIn(drawRect), byRoundingCorners: style.roundedCorners, cornerRadii: CGSizeMake(style.cornerRadius, style.cornerRadius))
+                let b:UIBezierPath
+                
+                if let p = context.path {
+                    b = p
+                } else {
+                    b = UIBezierPath(roundedRect: rect.centeredIn(drawRect), byRoundingCorners: style.roundedCorners, cornerRadii: CGSizeMake(style.cornerRadius, style.cornerRadius))
+                }
                 let c = UIGraphicsGetCurrentContext()
                 CGContextSetLineWidth(c, self.width)
                 CGContextSetStrokeColorWithColor(c, self.color.color.CGColor)
                 CGContextAddPath(c, b.CGPath)
                 CGContextStrokePath(c)
             })
-            if style.renderAsynchronously {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    v.dyn_overlayView.image = image
-                    v.dyn_overlayView.contentMode = .Center
-                })
-            } else {
-                v.dyn_overlayView.image = image
-                v.dyn_overlayView.contentMode = .Center
-            }
+            v.dyn_overlayView.image = image
+            v.dyn_overlayView.contentMode = .Center
         }
     }
     
@@ -251,14 +454,17 @@ public struct Border:DrawingStyleAttribute {
                 CGContextRestoreGState(c)
             }
 
-
             self.color.color.set()
             let bez:UIBezierPath
             var offset:CGSize = CGSizeZero
 
             switch self.borderType {
             case .InnerStroke:
-                bez = UIBezierPath(roundedRect: rect.insetBy(dx: self.width/2, dy: self.width/2), byRoundingCorners: style.roundedCorners, cornerRadii: CGSizeMake(style.cornerRadius, style.cornerRadius))
+                if let p = context.path {
+                    bez = p
+                } else {
+                    bez = UIBezierPath(roundedRect: rect.insetBy(dx: self.width/2, dy: self.width/2), byRoundingCorners: style.roundedCorners, cornerRadii: CGSizeMake(style.cornerRadius, style.cornerRadius))
+                }
                 bez.lineWidth = self.width
                 bez.stroke()
             default:
@@ -275,7 +481,12 @@ public struct Border:DrawingStyleAttribute {
                     break
                 }
                 
-                bez = UIBezierPath(roundedRect: rect, byRoundingCorners: style.roundedCorners, cornerRadii: CGSizeMake(style.cornerRadius, style.cornerRadius))
+                if let p = context.path {
+                    bez = p
+                } else {
+                    bez = UIBezierPath(roundedRect: rect, byRoundingCorners: style.roundedCorners, cornerRadii: CGSizeMake(style.cornerRadius, style.cornerRadius))
+                }
+                
                 renderInnerBorder(bez, shadowOffset: offset)
             }
         }
@@ -284,13 +495,17 @@ public struct Border:DrawingStyleAttribute {
 }
 
 public struct Shadow:DrawingStyleAttribute {
-
     let radius:CGFloat
     let color:Color
     let offset:CGSize
     
     public func render(context:RenderContext) {
-        
+        if let v = context.view, p = context.path {
+            v.layer.shadowPath = p.CGPath
+            v.layer.shadowColor = self.color.color.CGColor
+            v.layer.shadowOffset = self.offset
+            v.layer.shadowRadius = self.radius
+        }
     }
     
     public func asNSShadow() -> NSShadow {
@@ -328,13 +543,26 @@ public struct Color:FillStyleAttribute {
     
     private var _color:UIColor?
     public var color:UIColor {
-        if let color = _color {
-            return color.colorWithAlphaComponent(self.alpha)
+        var color:UIColor? = _color
+        
+        if color == nil, let name = self.name {
+            if let found = DynUI.colorForName(name) {
+                color = found.color
+            }
         }
         
-        if let name = self.name {
-            if let found = DynUI.colorForName(name) { return found.color.colorWithAlphaComponent(self.alpha) }
+        if var color = color {
+            color = color.colorWithAlphaComponent(self.alpha)
+            if self.brightnessAdjustment != 0 {
+                if self.brightnessAdjustment > 0 {
+                    color = color.lighterBy(self.brightnessAdjustment)
+                } else if self.brightnessAdjustment < 0 {
+                    color = color.darkerBy(-self.brightnessAdjustment)
+                }
+            }
+            return color
         }
+        
         return UIColor()
     }
     
@@ -353,8 +581,9 @@ public struct Color:FillStyleAttribute {
         _color = color
     }
     
-    public init(name:StyleNaming) {
+    public init(name:StyleNaming, alpha:CGFloat = 1) {
         self.name = name
+        self.alpha = alpha
     }
     
     public init(_ name:StyleNaming, alpha:CGFloat = 1) {
@@ -367,6 +596,44 @@ public struct Color:FillStyleAttribute {
         self.name = withHexAsName
     }
     
+    private var brightnessAdjustment:Double = 0
+}
+
+extension Color {
+    public func lighterBy(percent : Double) -> Color {
+        var new = self
+        new.brightnessAdjustment = percent;
+        return new
+    }
+
+    public func darkerBy(percent : Double) -> Color {
+        var new = self
+        new.brightnessAdjustment = -percent
+        return new
+    }
+}
+
+extension UIColor {
+    private func lighterBy(percent : Double) -> UIColor {
+        return colorWithBrightnessFactor(CGFloat(1 + percent));
+    }
+    
+    private func darkerBy(percent : Double) -> UIColor {
+        return colorWithBrightnessFactor(CGFloat(1 - percent));
+    }
+    
+    private func colorWithBrightnessFactor(factor: CGFloat) -> UIColor {
+        var hue : CGFloat = 0
+        var saturation : CGFloat = 0
+        var brightness : CGFloat = 0
+        var alpha : CGFloat = 0
+        
+        if getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
+            return UIColor(hue: hue, saturation: saturation, brightness: brightness * factor, alpha: alpha)
+        } else {
+            return self;
+        }
+    }
 }
 
 extension Color:AutoSerializable {
