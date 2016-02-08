@@ -40,23 +40,12 @@ internal class ExtensionPropertyManager:NSObject {
 }
 
 extension UIView {
-    public var dyn_styleName:StyleNaming? {
+        public var dyn_viewStyle:ViewStyle? {
         get {
-            if let style = self.dyn_renderableStyles["dyn_styleName"] { return style }
-            return nil
+            return self.dyn_getRenderableStyle("dyn_viewStyle")
         }
         set {
-            self.dyn_renderableStyles["dyn_styleName"] = newValue
-        }
-    }
-    
-    public var dyn_style:ViewStyle? {
-        get {
-            if let style = self.dyn_renderableViewStyles["dyn_style"] { return style }
-            return nil
-        }
-        set {
-            self.dyn_renderableViewStyles["dyn_style"] = newValue
+            self.dyn_setRenderableStyle("dyn_viewStyle", style: newValue)
         }
     }
 }
@@ -67,9 +56,17 @@ extension UIView {
         self.dyn_render()
     }
     
-    private var dyn_renderableViewStyles:[String:ViewStyle?] {
+    internal func dyn_getRenderableStyle<T:Renderable>(key:String) -> T? {
+        return self.dyn_renderableViewStyles[key] as? T
+    }
+    
+    internal func dyn_setRenderableStyle<T:Renderable>(key:String, style:T?) {
+        self.dyn_renderableViewStyles[key] = style
+    }
+    
+    internal var dyn_renderableViewStyles:[String:Renderable?] {
         get {
-            if let array = (self.dyn_getProp("dyn_renderableViewStyles") as [String:ViewStyle?]?) { return array }
+            if let array = (self.dyn_getProp("dyn_renderableViewStyles") as [String:Renderable?]?) { return array }
             return [:]
         }
         set {
@@ -77,19 +74,8 @@ extension UIView {
             self.dyn_setup()
         }
     }
-    
-    private var dyn_renderableStyles:[String:StyleNaming?] {
-        get {
-            if let array = (self.dyn_getProp("dyn_renderableStyles") as [String:StyleNaming?]?) { return array }
-            return [:]
-        }
-        set {
-            self.dyn_setProp(newValue, "dyn_renderableStyles")
-            self.dyn_setup()
-        }
-    }
-    
-    private var dyn_disposeBag:DisposeBag? {
+ 
+    internal var dyn_disposeBag:DisposeBag? {
         get {
             return self.dyn_getProp("disposeBag")
         }
@@ -98,7 +84,7 @@ extension UIView {
         }
     }
     
-    private var dyn_lastRecordedFrame:CGRect? {
+    internal var dyn_lastRecordedFrame:CGRect? {
         get { return self.dyn_getProp("dyn_lastRecordedFrame") }
         set { self.dyn_setProp(newValue, "dyn_lastRecordedFrame") }
     }
@@ -112,8 +98,10 @@ extension UIView {
         self.dyn_disposeBag = DisposeBag()
         
         self.dyn_disposeBag?.addDisposable(self.rx_observe(CGRect.self, "layer.bounds").subscribeNext({ [weak self] (rect) -> Void in
+            guard self?.layer.bounds.size.width > 0 else { return }
+            guard self?.layer.bounds.size.height > 0 else { return }
             log("inside frame observer - \(rect)")
-                self?.dyn_render()
+            self?.dyn_render()
         }))
     }
     
@@ -123,7 +111,7 @@ extension UIView {
         self.dyn_disposeBag = nil
     }
     
-    private var dyn_numberOfTimesRendered:Int {
+    internal var dyn_numberOfTimesRendered:Int {
         get { if let num = self.dyn_getProp("timesRendered") as Int? { return num } else {
             return 0
             } }
@@ -136,12 +124,6 @@ extension UIView {
                 log("TIMES RENDERED: \(self.dyn_numberOfTimesRendered)")
                 return UIImage.drawImage(self.bounds.size, withBlock: { (rect) -> Void in
                     let context = RenderContext.init(rect: self.bounds, view: self,  parameters: nil)
-                    for (_, styleName) in self.dyn_renderableStyles {
-                        guard let styleName = styleName else { continue }
-                        guard let style = DynUI.drawableStyleForName(styleName) else { continue }
-                        style.render(context)
-                    }
-                    
                     for (_, style) in self.dyn_renderableViewStyles {
                         guard let style = style else { continue }
                         style.render(context)
@@ -149,7 +131,6 @@ extension UIView {
                 })
             }
             
-            log("\(self.dyn_styleName)")
         if let lastRecordedFrame = self.dyn_lastRecordedFrame {
             if lastRecordedFrame != self.layer.bounds {
                 self.layer.contents = render().CGImage
@@ -213,6 +194,18 @@ internal class OverlayView: UIImageView {
                 self?.layer.bounds = rect
             }
             }).addDisposableTo(self.disposeBag)
+        
+        self.attachedTo.rx_observe(CGAffineTransform.self, "transform").subscribeNext ({ [weak self] (transform) -> Void in
+            if let transform = transform {
+                self?.transform = transform
+            }
+            }).addDisposableTo(self.disposeBag)
+        
+        self.attachedTo.rx_observe(CGFloat.self, "alpha").subscribeNext ({ [weak self] (alpha) -> Void in
+            if let alpha = alpha {
+                self?.alpha = alpha
+            }
+            }).addDisposableTo(self.disposeBag)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -220,93 +213,14 @@ internal class OverlayView: UIImageView {
     }
 }
 
-public protocol TextStyleable: class {
-    var dyn_textStyle:TextStyle? { get set }
-}
-
-extension UILabel: TextStyleable {
-    public var dyn_textStyle:TextStyle? {
+extension UIButton {
+    
+    public var dyn_buttonStyle:ButtonStyle? {
         get {
-            return self.dyn_getProp("dyn_textStyleName")
+            return self.dyn_getRenderableStyle("dyn_buttonStyle")
         }
         set {
-            self.dyn_setProp(newValue, "dyn_textStyleName")
-            
-            if let style = newValue {
-                if let _ = self.dyn_textStyleDisposeBag {
-                    self.dyn_applyTextStyle(style)
-                } else {
-                    self.dyn_textStyleDisposeBag = DisposeBag()
-                    self.dyn_textStyleDisposeBag!.addDisposable(self.rx_observe(String.self, "text").subscribeNext({ [weak self] (text) -> Void in
-                        self?.dyn_applyTextStyle(style)
-                        }))
-                }
-            } else {
-                self.dyn_textStyleDisposeBag = nil
-                self.dyn_highlightTextStyleDisposeBag = nil
-            }
-        }
-    }
-    
-    private func dyn_applyTextStyle(style:TextStyle) {
-        let attr = style.asAttributes()
-        if let text = self.text {
-            self.attributedText = NSAttributedString(string: text, attributes: attr)
-        } else if let text = self.attributedText {
-            self.attributedText = NSAttributedString(string: text.string, attributes: attr)
-        }
-        
-        self.dyn_configureHighlightStyle()
-    }
-    
-    private func dyn_configureHighlightStyle() {
-        if let highlightColor = self.dyn_textStyle?.highlightedTextColor {
-            if self.dyn_highlightTextStyleDisposeBag != nil { return }
-            self.dyn_highlightTextStyleDisposeBag = DisposeBag()
-            
-            self.dyn_highlightTextStyleDisposeBag!.addDisposable(self.rx_observe(Bool.self, "highlighted").subscribeNext({ [weak self] (_) -> Void in
-                if self == nil { return }
-                if self?.dyn_textStyle == nil { return }
-                if self?.highlighted ?? false {
-                    self?.dyn_applyTextStyle(self!.dyn_textStyle!.withColor(highlightColor))
-                } else {
-                    self?.dyn_applyTextStyle(self!.dyn_textStyle!)
-                }
-            }))
-            
-        } else {
-            self.dyn_highlightTextStyleDisposeBag = nil
-        }
-    }
-    
-    private var dyn_textStyleDisposeBag:DisposeBag? {
-        get { return self.dyn_getProp("dyn_textStyleDisposeBag") }
-        set { self.dyn_setProp(newValue, "dyn_textStyleDisposeBag") }
-    }
-    
-    private var dyn_highlightTextStyleDisposeBag:DisposeBag? {
-        get { return self.dyn_getProp("dyn_highlightTextStyleDisposeBag") }
-        set { self.dyn_setProp(newValue, "dyn_highlightTextStyleDisposeBag") }
-    }
-}
-
-extension UIButton: TextStyleable {
-    public var dyn_textStyle:TextStyle? {
-        get {
-            return self.titleLabel!.dyn_textStyle
-        }
-        set {
-            self.titleLabel!.dyn_textStyle = newValue
-        }
-    }
-    
-    public var dyn_buttonStyle:StyleNaming? {
-        get {
-            if let style = self.dyn_renderableStyles["dyn_buttonStyle"] { return style }
-            return nil
-        }
-        set {
-            self.dyn_renderableStyles["dyn_buttonStyle"] = newValue
+            self.dyn_setRenderableStyle("dyn_buttonStyle", style: newValue)
             
             if let _ = newValue {
                 self.dyn_setupButtonStyle()
@@ -316,23 +230,18 @@ extension UIButton: TextStyleable {
     }
     
     private func dyn_applyStyleForState() {
-        if let styleName = self.dyn_buttonStyle {
-            if let style = DynUI.drawableStyleForName(styleName) as? ButtonStyle {
-                self.dyn_lastRecordedFrame = nil
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    if self.highlighted {
-                        if let highlightedStyle = style.highlightedViewStyle {
-                            self.dyn_styleName = highlightedStyle
-                        }
-                        if let highlightedTextStyle = style.highlightedTextStyle {
-                            self.dyn_textStyle = highlightedTextStyle
-                        }
-                    } else {
-                        self.dyn_styleName = style.viewStyle
-                        self.dyn_textStyle = style.textStyle
+        if let style = self.dyn_buttonStyle {
+            self.dyn_lastRecordedFrame = nil
+            self.dyn_textStyle = style.textStyle
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                if self.highlighted {
+                    if let highlightedStyle = style.highlightedViewStyle {
+                        self.dyn_viewStyle = highlightedStyle
                     }
-                })
-            }
+                } else {
+                    self.dyn_viewStyle = style.viewStyle
+                }
+            })
         }
     }
     
@@ -357,20 +266,9 @@ extension UIButton: TextStyleable {
                     this.dyn_applyStyleForState()
                 }
             }
-        }))
+            }))
     }
 }
 
-extension UITextField: TextStyleable {
-    public var dyn_textStyle:TextStyle? {
-        get {
-            return self.dyn_getProp("dyn_textStyle")
-        }
-        set {
-            self.dyn_setProp(newValue, "dyn_textStyle")
-            if let style = newValue {
-                self.defaultTextAttributes = style.asAttributes()
-            }
-        }
-    }
-}
+
+

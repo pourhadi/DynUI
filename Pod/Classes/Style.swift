@@ -69,11 +69,24 @@ public struct ViewStyle : DrawableStyle {
         }}
     
     public var innerShadow:Shadow?
-    public var outerShadow:Shadow?
     
-    public var mask:Bool = false
+    private var _outerShadow:Shadow?
+    public var outerShadow:Shadow? {
+        set { _outerShadow = newValue }
+        get { return _outerShadow ?? self.savedStyle?.outerShadow }
+    }
     
-    public var renderInset:UIEdgeInsets = UIEdgeInsetsZero
+    private var _mask:Bool?
+    public var mask:Bool {
+        set { _mask = newValue }
+        get { return _mask ?? self.savedStyle?.mask ?? false }
+    }
+    
+    private var _renderInset:UIEdgeInsets?
+    public var renderInset:UIEdgeInsets {
+        set { _renderInset = newValue }
+        get { return _renderInset ?? self.savedStyle?.renderInset ?? UIEdgeInsetsZero }
+    }
     
     public func render(var context:RenderContext) {
         if let rect = context.rect {
@@ -131,9 +144,9 @@ public struct ViewStyle : DrawableStyle {
         self.name = newWithName
     }
     
-    public init(savedWithName:StyleNaming) {
+    public init(_ savedStyleNamed:StyleNaming) {
         self.originality = .Saved
-        self.name = savedWithName
+        self.name = savedStyleNamed
     }
 }
 
@@ -146,16 +159,41 @@ extension ViewStyle {
 }
 
 public struct ButtonStyle: DrawableStyle {
-    public init(name:StyleNaming) { self.name = name }
+    var originality:StyleOriginality
+    public init(name:StyleNaming) {
+        self.name = name
+        self.originality = .New
+    }
+    
+    private var savedStyle:ButtonStyle? {
+        if self.originality == .Saved {
+            return DynUI.drawableStyleForName(self.name) as? ButtonStyle
+        }
+        return nil
+    }
     public var name:StyleNaming
 
-    public var viewStyle:StyleNaming?
-    public var highlightedViewStyle:StyleNaming?
+    private var _viewStyle:ViewStyle?
+    public var viewStyle:ViewStyle? {
+        set { _viewStyle = newValue }
+        get { return _viewStyle ?? self.savedStyle?.viewStyle }}
     
-    public var textStyle:TextStyle?
-    public var highlightedTextStyle:TextStyle?
+    private var _highlightedViewStyle:ViewStyle?
+    public var highlightedViewStyle:ViewStyle? {
+        set { _highlightedViewStyle = newValue }
+        get { return _highlightedViewStyle ?? self.savedStyle?.highlightedViewStyle }}
+    
+    private var _textStyle:TextStyle?
+    public var textStyle:TextStyle? {
+        set { _textStyle = newValue }
+        get { return _textStyle ?? self.savedStyle?.textStyle }}
     
     public func render(context:RenderContext) { }
+    
+    public init(_ savedStyleNamed:StyleNaming) {
+        self.name = savedStyleNamed
+        self.originality = .Saved
+    }
 }
 
 internal enum StyleOriginality:Int {
@@ -520,6 +558,12 @@ public struct Shadow:DrawingStyleAttribute {
         self.radius = radius
         self.color = color
         self.offset = offset
+    }
+    
+    public init() {
+        self.radius = 0
+        self.color = Color.init(UIColor.clearColor())
+        self.offset = CGSizeZero
     }
 }
 
