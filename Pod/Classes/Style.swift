@@ -328,7 +328,26 @@ public struct TextStyle : Style {
         return attributes
     }
     
-    public func asCSS() -> String { return "" }
+    public func asCSS() -> String {
+        var css = ""
+        css += "font-family:\(self.font.familyName);"
+        css += "font-size:\(self.font.pointSize)px;"
+        
+        if let color = self.color {
+            css += "color:\(color.color.hexString());"
+        }
+        
+        if let alignment = self.alignment {
+            let alignString:String
+            switch alignment {
+            case .Left: alignString = "left"
+            case .Right: alignString = "right"
+            default: alignString = "center"
+            }
+            css += "text-align:\(alignString);"
+        }
+        return css
+    }
     
     public init(newStyleNamed name:StyleNaming, _ font:UIFont, _ color: Color = Color(UIColor.blackColor())) {
         self.originality = .New
