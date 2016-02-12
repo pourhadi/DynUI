@@ -33,10 +33,10 @@ public struct ViewStyle : DrawableStyle {
         return nil
     }
     
-    private let originality:StyleOriginality
+    internal let originality:StyleOriginality
     public var name:StyleNaming
     
-    private var _backgroundStyle:Fill?
+    internal var _backgroundStyle:Fill? = nil
     public var backgroundStyle:Fill? {
         set { _backgroundStyle = newValue }
         get {
@@ -44,7 +44,7 @@ public struct ViewStyle : DrawableStyle {
             else { if let style = self.savedStyle { return style.backgroundStyle } else { return nil } }
         }}
     
-    private var _borders:[Border]?
+    internal var _borders:[Border]? = nil
     public var borders:[Border] {
             set { _borders = newValue }
             get {
@@ -52,7 +52,7 @@ public struct ViewStyle : DrawableStyle {
                 else { if let style = self.savedStyle { return style.borders } else { return [] } }
             }}
     
-    private var _roundedCorners:UIRectCorner?
+    internal var _roundedCorners:UIRectCorner? = nil
     public var roundedCorners:UIRectCorner {
         set { _roundedCorners = newValue }
         get {
@@ -60,7 +60,7 @@ public struct ViewStyle : DrawableStyle {
             else { if let style = self.savedStyle { return style.roundedCorners } else { return [] } }
         }}
     
-    private var _cornerRadius:CGFloat?
+    internal var _cornerRadius:CGFloat? = nil
     public var cornerRadius:CGFloat {
         set { _cornerRadius = newValue }
         get {
@@ -68,21 +68,21 @@ public struct ViewStyle : DrawableStyle {
             else { if let style = self.savedStyle { return style.cornerRadius } else { return 0 } }
         }}
     
-    public var innerShadow:Shadow?
+    public var innerShadow:Shadow? = nil
     
-    private var _outerShadow:Shadow?
+    internal var _outerShadow:Shadow? = nil
     public var outerShadow:Shadow? {
         set { _outerShadow = newValue }
         get { return _outerShadow ?? self.savedStyle?.outerShadow }
     }
     
-    private var _mask:Bool?
+    internal var _mask:Bool? = nil
     public var mask:Bool {
         set { _mask = newValue }
         get { return _mask ?? self.savedStyle?.mask ?? false }
     }
     
-    private var _renderInset:UIEdgeInsets?
+    internal var _renderInset:UIEdgeInsets? = nil
     public var renderInset:UIEdgeInsets {
         set { _renderInset = newValue }
         get { return _renderInset ?? self.savedStyle?.renderInset ?? UIEdgeInsetsZero }
@@ -155,6 +155,25 @@ extension ViewStyle {
         var new = self
         new.borders = borders
         return new
+    }
+}
+
+extension ViewStyle:AutoSerializable {
+    public init?(withValuesForKeys: [String : Serializable]) {
+        guard let name = withValuesForKeys["name"] as? String else {
+            return nil
+        }
+        
+        self.originality = .New
+        self.name = name
+        
+        self.backgroundStyle = withValuesForKeys["_backgroundStyle"] as? Fill
+        self.borders = withValuesForKeys["_borders"] as? [Border] ?? []
+        self.roundedCorners = withValuesForKeys["_roundedCorners"] as? UIRectCorner ?? []
+        self.cornerRadius = withValuesForKeys["_cornerRadius"] as? CGFloat ?? 0
+        self.outerShadow = withValuesForKeys["_outerShadow"] as? Shadow
+        self.mask = withValuesForKeys["_mask"] as? Bool ?? false
+        self.renderInset = withValuesForKeys["_renderInset"] as? UIEdgeInsets ?? UIEdgeInsetsZero
     }
 }
 
@@ -410,8 +429,14 @@ public struct Fill: DrawingStyleAttribute {
     }
 }
 
+extension Fill: AutoSerializable {
+    public init?(withValuesForKeys: [String:Serializable]) {
+        self.fillStyle = withValuesForKeys["fillStyle"] as! FillStyleAttribute
+    }
+}
+
 public struct Border:DrawingStyleAttribute {
-    public enum BorderType {
+    public enum BorderType:Int {
         case OuterStroke
         case InnerStroke
         case InnerTop
@@ -529,7 +554,15 @@ public struct Border:DrawingStyleAttribute {
             }
         }
     }
-    
+}
+
+extension Border: AutoSerializable {
+    public init?(withValuesForKeys: [String : Serializable]) {
+        self.width = withValuesForKeys["width"] as! CGFloat
+        self.color = withValuesForKeys["color"] as! Color
+        self.borderType = withValuesForKeys["borderType"] as! BorderType
+        self.blendMode = withValuesForKeys["blendMode"] as! CGBlendMode
+    }
 }
 
 public struct Shadow:DrawingStyleAttribute {
@@ -579,13 +612,12 @@ public struct TextStyleAttribute:StyleAttribute {}
 
 public struct InvalidStyle:StyleAttribute {}
 
-public protocol FillStyleAttribute: Renderable {}
-
+public protocol FillStyleAttribute: Renderable, Serializable {}
 public struct Color:FillStyleAttribute {
-    var name:StyleNaming?
+    var name:StyleNaming? = nil
     var alpha:CGFloat = 1
     
-    private var _color:UIColor?
+    private var _color:UIColor? = nil
     public var color:UIColor {
         var color:UIColor? = _color
         
@@ -682,10 +714,13 @@ extension UIColor {
 
 extension Color:AutoSerializable {
     public init?(withValuesForKeys:[String:Serializable]) {
-        if let color = withValuesForKeys["color"] as? UIColor {
-            _color = color
-        } else { _color = nil }
-        self.name = withValuesForKeys["name"] as? StyleNaming
+        if let color = withValuesForKeys["_color"] as? UIColor {
+            self.init(color:color)
+        } else if let name = withValuesForKeys["name"] as? StyleNaming {
+            self.init(name:name)
+        } else {
+            return nil
+        }
     }
 }
 

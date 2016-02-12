@@ -79,6 +79,9 @@
 		4299FE315EDECB1A32402C06C221329E /* ShareReplay1WhileConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E65AE77C116C1981B0A8F3937747846 /* ShareReplay1WhileConnected.swift */; };
 		43E29D88597D2CD3F3A11CF941DCCAF3 /* RxCollectionViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A529D7103E339742F298005028B8FAC4 /* RxCollectionViewDelegateProxy.swift */; };
 		44469DD91C54653100432F98 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44469DD81C54653100432F98 /* Helpers.swift */; };
+		446F0FF21C686E9900EF1587 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F0FEF1C686E9900EF1587 /* Text.swift */; };
+		446F0FF31C686E9900EF1587 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F0FF01C686E9900EF1587 /* UIColorExtension.swift */; };
+		446F0FF41C686E9900EF1587 /* Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F0FF11C686E9900EF1587 /* Popover.swift */; };
 		4564C3D778F1D8838C8CF7F6B149CFE4 /* StableCompositeDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BC95FD14F11C0B0B6A15AF96862B22 /* StableCompositeDisposable.swift */; };
 		4667993325C261F0FD74A354B7EB1B81 /* Pods-DynUI_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABAF038CD6C3308FD29C9E4A034121 /* Pods-DynUI_Tests-dummy.m */; };
 		4883716F352D1DAC6488BBC2617D3C7E /* Pods-DynUI_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 039F7D61F3BFAB617900118AD63370FC /* Pods-DynUI_Example-dummy.m */; };
@@ -476,6 +479,9 @@
 		421B1F76E51AFED14ACE58BE480137E8 /* SerialDispatchQueueScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SerialDispatchQueueScheduler.swift; path = RxSwift/Schedulers/SerialDispatchQueueScheduler.swift; sourceTree = "<group>"; };
 		43BC95FD14F11C0B0B6A15AF96862B22 /* StableCompositeDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StableCompositeDisposable.swift; path = RxSwift/Disposables/StableCompositeDisposable.swift; sourceTree = "<group>"; };
 		44469DD81C54653100432F98 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		446F0FEF1C686E9900EF1587 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		446F0FF01C686E9900EF1587 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		446F0FF11C686E9900EF1587 /* Popover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popover.swift; sourceTree = "<group>"; };
 		4643D73F7CA2D6B2251CBF38B3B1649A /* TakeWhile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TakeWhile.swift; path = RxSwift/Observables/Implementations/TakeWhile.swift; sourceTree = "<group>"; };
 		479D47FEC8528F99C3AB593A99FE8017 /* Pods-DynUI_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DynUI_Tests-umbrella.h"; sourceTree = "<group>"; };
 		48F4083417C111A5F78DFA00727FAB2E /* RxCocoa.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RxCocoa.h; path = RxCocoa/RxCocoa.h; sourceTree = "<group>"; };
@@ -1000,6 +1006,9 @@
 		8DDE448B608E9CEAC30C4984AC4B5C57 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				446F0FEF1C686E9900EF1587 /* Text.swift */,
+				446F0FF01C686E9900EF1587 /* UIColorExtension.swift */,
+				446F0FF11C686E9900EF1587 /* Popover.swift */,
 				44469DD81C54653100432F98 /* Helpers.swift */,
 				C2EF790D4DDB98FDD4CA42A20DB8BBBF /* DynUI.swift */,
 				1E4204F1F8FEABEE3971B63FBAFEB41A /* View.swift */,
@@ -1565,9 +1574,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				900024DDDC6644C942D9BB9F688750B4 /* DynUI-dummy.m in Sources */,
+				446F0FF31C686E9900EF1587 /* UIColorExtension.swift in Sources */,
 				9B065BE88D4B65C49D3A9A052476EB1B /* DynUI.swift in Sources */,
+				446F0FF41C686E9900EF1587 /* Popover.swift in Sources */,
 				860DB4C357AAC75ED3D9583C108417AE /* View.swift in Sources */,
 				0811293F989EEBB9AFCEDD7332956036 /* Style.swift in Sources */,
+				446F0FF21C686E9900EF1587 /* Text.swift in Sources */,
 				44469DD91C54653100432F98 /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -167,10 +167,10 @@ extension UIColor {
     }
     
     public override var description: String {
-        return self.hexString(true)
+        return "\(self.dynamicType.description): \(self.hexString(true))"
     }
     
     public override var debugDescription: String {
-        return self.hexString(true)
+        return "\(self.dynamicType.description): \(self.hexString(true))"
     }
 }

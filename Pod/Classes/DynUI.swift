@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SuperSerial
 
 internal func log(logMessage: String = "", _ functionName: String = __FUNCTION__) {
     if DynUI.loggingEnabled { print("\(functionName): \(logMessage)") }
@@ -14,9 +15,17 @@ internal func log(logMessage: String = "", _ functionName: String = __FUNCTION__
 
 public class DynUI {
     
+    private static var prepared = false
+    public class func prepare() {
+        guard !prepared else { return }
+        prepared = true
+        SuperSerial.addSerializableTypes([ViewStyle.self, Color.self, Gradient.self, Fill.self, Shadow.self, Border.self])
+    }
+    
     public static var loggingEnabled:Bool = false
     
     public class func initialize(colors:[Color] = [], drawableStyles:[DrawableStyle] = [], textStyles:[TextStyle] = []) {
+        prepare()
         _colors = colors
         _drawableStyles = drawableStyles
         _textStyles = textStyles
