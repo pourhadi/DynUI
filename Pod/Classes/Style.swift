@@ -156,6 +156,12 @@ extension ViewStyle {
         new.borders = borders
         return new
     }
+    
+    public func withRenderInset(insets:UIEdgeInsets) -> ViewStyle {
+        var new = self
+        new.renderInset = insets
+        return new
+    }
 }
 
 public struct ButtonStyle: DrawableStyle {
