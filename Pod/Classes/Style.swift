@@ -189,6 +189,11 @@ public struct ButtonStyle: DrawableStyle {
         set { _highlightedViewStyle = newValue }
         get { return _highlightedViewStyle ?? self.savedStyle?.highlightedViewStyle }}
     
+    private var _disabledViewStyle:ViewStyle?
+    public var disabledViewStyle:ViewStyle? {
+        set { _disabledViewStyle = newValue }
+        get { return _disabledViewStyle ?? self.savedStyle?.disabledViewStyle }}
+    
     private var _textStyle:TextStyle?
     public var textStyle:TextStyle? {
         set { _textStyle = newValue }
