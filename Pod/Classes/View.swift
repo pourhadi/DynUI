@@ -238,6 +238,8 @@ extension UIButton {
                     if let highlightedStyle = style.highlightedViewStyle {
                         self.dyn_viewStyle = highlightedStyle
                     }
+                } else if self.enabled == false, let disabledStyle = style.disabledViewStyle {
+                    self.dyn_viewStyle = disabledStyle
                 } else {
                     self.dyn_viewStyle = style.viewStyle
                 }
@@ -265,6 +267,12 @@ extension UIButton {
                 } else {
                     this.dyn_applyStyleForState()
                 }
+            }
+            }))
+        
+        self.dyn_buttonDisposeBag!.addDisposable(self.rx_observe(Bool.self, "enabled").subscribeNext ({ [weak self] (highlighted) -> Void in
+            if let this = self {
+                this.dyn_applyStyleForState()
             }
             }))
     }

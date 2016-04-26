@@ -156,6 +156,12 @@ extension ViewStyle {
         new.borders = borders
         return new
     }
+    
+    public func withRenderInset(insets:UIEdgeInsets) -> ViewStyle {
+        var new = self
+        new.renderInset = insets
+        return new
+    }
 }
 
 extension ViewStyle:AutoSerializable {
@@ -201,6 +207,11 @@ public struct ButtonStyle: DrawableStyle {
     public var highlightedViewStyle:ViewStyle? {
         set { _highlightedViewStyle = newValue }
         get { return _highlightedViewStyle ?? self.savedStyle?.highlightedViewStyle }}
+    
+    private var _disabledViewStyle:ViewStyle?
+    public var disabledViewStyle:ViewStyle? {
+        set { _disabledViewStyle = newValue }
+        get { return _disabledViewStyle ?? self.savedStyle?.disabledViewStyle }}
     
     private var _textStyle:TextStyle?
     public var textStyle:TextStyle? {
