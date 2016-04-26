@@ -6,36 +6,19 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
 
-Pod::Spec.new do |s|
-  s.name             = "DynUI"
-  s.version          = "0.1.2"
-  s.summary          = "A meaninful description of DynUI because cocoapods demands it."
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = <<-DESC This is supposed to be the description?
-                       DESC
-
-  s.homepage         = "https://github.com/pourhadi/DynUI"
-  s.license          = 'MIT'
-  s.author           = { "Daniel Pourhadi" => "dan@pourhadi.com" }
-  s.source           = { :git => "https://github.com/pourhadi/DynUI.git", :tag => s.version.to_s }
-
-  s.platform     = :ios, '8.0'
-  s.requires_arc = true
-
-  s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'DynUI' => ['Pod/Assets/*.png']
-  }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit'
-s.dependency 'SuperSerial'
-s.dependency 'RxSwift',    '~> 2.0'
-s.dependency 'RxCocoa',    '~> 2.0'
-s.dependency 'RxBlocking', '~> 2.0'
+Pod::Spec.new do |spec|
+  spec.name             = 'DynUI'
+  spec.version          = '0.1.2'
+  spec.license          = { :type => 'MIT' }
+  spec.homepage         = 'https://github.com/pourhadi/DynUI'
+  spec.authors          = { 'Dan Pourhadi' => 'dan@pourhadi.com' }
+  spec.summary          = 'Style library for iOS.'
+  spec.source           = { :git => "https://github.com/pourhadi/DynUI.git", :tag => s.version.to_s }
+  spec.source_files = 'Pod/Classes/**/*'
+  spec.framework        = 'SystemConfiguration'
+  spec.requires_arc     = true
+  spec.dependency 'SuperSerial'
+spec.dependency 'RxSwift',    '~> 2.0'
+spec.dependency 'RxCocoa',    '~> 2.0'
+spec.dependency 'RxBlocking', '~> 2.0'
 end
