@@ -9,7 +9,7 @@
 import Foundation
 import SuperSerial
 
-internal func log(logMessage: String = "", _ functionName: String = __FUNCTION__) {
+internal func log(logMessage: String = "", _ functionName: String = #function) {
     if DynUI.loggingEnabled { print("\(functionName): \(logMessage)") }
 }
 

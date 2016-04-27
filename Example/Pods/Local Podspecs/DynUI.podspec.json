@@ -1,27 +1,21 @@
 {
   "name": "DynUI",
-  "version": "0.1.1",
-  "summary": "A short description of DynUI.",
-  "description": "",
-  "homepage": "https://github.com/pourhadi/DynUI",
-  "license": "MIT",
-  "authors": {
-    "Daniel Pourhadi": "dan@pourhadi.com"
+  "version": "0.1.2",
+  "license": {
+    "type": "MIT"
   },
+  "homepage": "https://github.com/pourhadi/DynUI",
+  "authors": {
+    "Dan Pourhadi": "dan@pourhadi.com"
+  },
+  "summary": "Style library for iOS.",
   "source": {
     "git": "https://github.com/pourhadi/DynUI.git",
-    "tag": "0.1.1"
+    "tag": "0.1.2"
   },
-  "platforms": {
-    "ios": "8.0"
-  },
-  "requires_arc": true,
   "source_files": "Pod/Classes/**/*",
-  "resource_bundles": {
-    "DynUI": [
-      "Pod/Assets/*.png"
-    ]
-  },
+  "frameworks": "SystemConfiguration",
+  "requires_arc": true,
   "dependencies": {
     "SuperSerial": [
 
@@ -35,5 +29,11 @@
     "RxBlocking": [
       "~> 2.0"
     ]
+  },
+  "platforms": {
+    "osx": null,
+    "ios": null,
+    "tvos": null,
+    "watchos": null
   }
 }

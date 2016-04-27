@@ -1,31 +1,31 @@
 PODS:
-  - DynUI (0.1.1):
+  - DynUI (0.1.2):
     - RxBlocking (~> 2.0)
     - RxCocoa (~> 2.0)
     - RxSwift (~> 2.0)
     - SuperSerial
-  - RxBlocking (2.1.0):
-    - RxSwift (~> 2.0)
-  - RxCocoa (2.1.0):
-    - RxSwift (~> 2.0)
-  - RxSwift (2.1.0)
+  - RxBlocking (2.4):
+    - RxSwift (~> 2.4)
+  - RxCocoa (2.4):
+    - RxSwift (~> 2.4)
+  - RxSwift (2.4)
   - SuperSerial (0.1.8)
 
 DEPENDENCIES:
   - DynUI (from `../`)
-  - SuperSerial (from `/Users/danpourhadi/Projects/SuperSerial`)
+  - SuperSerial
 
 EXTERNAL SOURCES:
   DynUI:
     :path: "../"
-  SuperSerial:
-    :path: "/Users/danpourhadi/Projects/SuperSerial"
 
 SPEC CHECKSUMS:
-  DynUI: f8e9a413e9f66c87e396f7be01276d3c06470dcb
-  RxBlocking: fa297def258d85c5beae9ed507f94645260b3747
-  RxCocoa: 79b5feb8378545336e756a0a33fcf5e95050b71c
-  RxSwift: 110fb07f81c17c2c3b3254d168363057b1880d18
+  DynUI: d029fe21a1d6036ca8e0d80f5e665d95940cd8e5
+  RxBlocking: 1226c1fa0ca1e0ca5f964d4330ca3649f2128680
+  RxCocoa: 7d6cd877de99f5640306b3d6cf87f580c1d91b61
+  RxSwift: 67b9ef4e8b34fb394e200e754c6a09cc16559f94
   SuperSerial: 880e45ab50f0efbc5397fa2aa79bb86d8827c875
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 9b57d488324038bd7409bf36aa60f873d808e131
+
+COCOAPODS: 1.0.0.beta.8

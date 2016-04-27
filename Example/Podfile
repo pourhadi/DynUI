@@ -1,12 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'DynUI_Example', :exclusive => true do
+target 'DynUI_Example' do
   pod "DynUI", :path => "../"
 end
 
-target 'DynUI_Tests', :exclusive => true do
+target 'DynUI_Tests' do
   pod "DynUI", :path => "../"
 
-pod 'SuperSerial', :path => "/Users/danpourhadi/Projects/SuperSerial"
+pod 'SuperSerial'
 end

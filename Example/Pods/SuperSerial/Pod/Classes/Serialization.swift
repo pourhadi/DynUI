@@ -8,12 +8,44 @@
 
 import Foundation
 
+public protocol Serializable: Deserializable {
+    func ss_serialize() -> Serialized
+    init?(fromSerialized:Serialized)
+}
+
+/**
+ When a struct that conforms to AutoSerializable is serialized, its stored properties (those with types that conform to Serializable) are automatically included in the serialization.
+ 
+ -ss_serialize() and -init?(fromSerialized:) are implemented in an extension; only -init?(withValuesForKeys:) needs to be implemented by the conforming struct.
+ */
+public protocol AutoSerializable:Serializable {
+    init?(withValuesForKeys:[String:Serializable])
+}
+
+public protocol SerializableObject: class, Serializable {
+    init()
+}
+
+/** 
+ Objects that inherit from NSObject can conform to SerializableKVCObject for easy serialization of its Serializable-conforming properties listed in -serializableKeys.
+ 
+ -valueForKey: and -setValue:forKey: do not need to be manually implemented, as they are implemented by NSObject.
+ */
+public protocol SerializableKVCObject:SerializableObject, AutoSerializable {
+    static var serializableKeys:[String] { get }
+    
+    func valueForKey(key:String) -> AnyObject
+    func setValue(value: AnyObject?, forKey key: String)
+}
+
+
 private func log(logMessage: String, functionName: String = __FUNCTION__) {
     print("\(functionName): \(logMessage)")
 }
 
 private let _ss = SuperSerial()
 public class SuperSerial {
+    /// Custom types that can be deserialized must be specified here prior to deserialization.
     public class var serializableTypes:[Serializable.Type] {
         get {
             var all = _ss.customSerializableTypes
@@ -27,7 +59,7 @@ public class SuperSerial {
     
     private var customSerializableTypes = [Serializable.Type]()
     private var internalSerializableTypes:[Serializable.Type] {
-        return [Int.self, UInt.self, Float.self, String.self, CGPoint.self]
+        return [Int.self, UInt.self, Float.self, String.self, CGPoint.self, SSColor.self]
     }
 }
 
@@ -36,8 +68,8 @@ public enum Serialized: CustomStringConvertible {
     indirect case Dict([String:Serialized])
     indirect case Array([Serialized])
     case Str(String)
-    case Integer(IntegerType)
-    case FloatingPoint(FloatingPointType)
+    case Integer(Int)
+    case FloatingPoint(Float)
     
     public func toString() -> String {
         var string = "{\"ss_case\": \"\(self.caseAsString())\", \"ss_value\": "
@@ -214,33 +246,34 @@ private class Unwrapper {
 
 
 extension Serialized {
-    public func deserialize() -> (value:Deserializable, type:Deserializable.Type)? {
+    public func deserialize() -> Deserializable? {
         switch self {
         case .Dict(let dict):
             var newDict = [String:Serializable]()
             for (key, value) in dict {
-                let x:Serializable = value.deserialize()!.0 as! Serializable
+                let x:Serializable = value.deserialize() as! Serializable
                 newDict[key] = x
             }
-            return (newDict, newDict.dynamicType)
+            return newDict
         case .Array(let array):
             var newArray = [Serializable]()
             for obj in array {
-                newArray.append(obj.deserialize()!.0 as! Serializable)
+                newArray.append(obj.deserialize() as! Serializable)
             }
-            return (newArray, newArray.dynamicType)
+            return newArray
         case .Str(let string):
-            return (string, String.self)
+            return string
         case .Integer(let int):
-            return ((int as! Int), Int.self)
+            return (int)
         case .FloatingPoint(let float):
-            return (float as! Float, Float.self)
+            return float
         case .CustomType(let typeName, let data):
             let names = SuperSerial.serializableTypes.map({ $0.ss_typeName })
             if let index = names.indexOf("\(typeName).Type") {
                 let type:Serializable.Type = SuperSerial.serializableTypes[index]
                 let initd = type.init(fromSerialized: data)
-                return (initd!, type)
+                return initd
+                
             }
             return nil
         }
@@ -249,15 +282,6 @@ extension Serialized {
 
 public protocol Deserializable {}
 
-public protocol Serializable: Deserializable {
-    func ss_serialize() -> Serialized
-    init?(fromSerialized:Serialized)
-}
-
-public protocol AutoSerializable:Serializable {
-    init?(withValuesForKeys:[String:Serializable])
-}
-
 public extension AutoSerializable {
     public init?(fromSerialized: Serialized) {
         switch fromSerialized {
@@ -265,12 +289,23 @@ public extension AutoSerializable {
             var newData = [String:Serializable]()
             for (key,value) in dict {
                 if let d = value.deserialize() {
-                newData[key] = d.0 as? Serializable
+                newData[key] = d as? Serializable
                 }
             }
             self.init(withValuesForKeys: newData)
             break
         default: return nil
+        }
+    }
+}
+
+public extension SerializableKVCObject {
+    public init?(withValuesForKeys: [String : Serializable]) {
+        self.init()
+        for (key, value) in withValuesForKeys {
+            if self.dynamicType.serializableKeys.contains(key) {
+                self.setValue(value as? AnyObject, forKey: key)
+            }
         }
     }
 }
@@ -308,14 +343,7 @@ public extension Serializable {
     }
 }
 
-public protocol SerializableObject: NSObjectProtocol, AutoSerializable {
-    static var serializableKeys:[String] { get }
-    
-    func valueForKey(key:String) -> AnyObject
-    func setValue(value: AnyObject?, forKey key: String)
-}
-
-public extension SerializableObject {
+public extension SerializableKVCObject {
     public func ss_serialize() -> Serialized {
         var dict = [String:Serialized]()
         

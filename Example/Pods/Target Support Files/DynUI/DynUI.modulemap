@@ -1,0 +1,6 @@
+framework module DynUI {
+  umbrella header "DynUI-umbrella.h"
+
+  export *
+  module * { export * }
+}
