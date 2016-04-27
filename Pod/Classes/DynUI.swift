@@ -19,7 +19,7 @@ public class DynUI {
     public class func prepare() {
         guard !prepared else { return }
         prepared = true
-        SuperSerial.addSerializableTypes([ViewStyle.self, Color.self, Gradient.self, Fill.self, Shadow.self, Border.self])
+        SuperSerial.serializableTypes = [ViewStyle.self, Color.self, Gradient.self, Fill.self, Shadow.self, Border.self]
     }
     
     public static var loggingEnabled:Bool = false
