@@ -27,7 +27,9 @@ extension UILabel: TextStyleable {
                 } else {
                     self.dyn_textStyleDisposeBag = DisposeBag()
                     self.dyn_textStyleDisposeBag!.addDisposable(self.rx_observe(String.self, "text").subscribeNext({ [weak self] (text) -> Void in
-                        self?.dyn_applyTextStyle(style)
+                        if let style = self?.dyn_textStyle {
+                            self?.dyn_applyTextStyle(style)
+                        }
                         }))
                 }
             } else {

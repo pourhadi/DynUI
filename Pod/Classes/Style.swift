@@ -15,6 +15,17 @@ public protocol StyleNaming {
     var styleName:String { get }
 }
 
+private extension StyleNaming {
+    var none:Bool {
+        return false
+    }
+}
+
+private struct NoName:StyleNaming {
+    var styleName:String { return "" }
+    var none:Bool { return true }
+}
+
 extension String: StyleNaming {
     public var styleName:String { return self }
 }
@@ -27,7 +38,7 @@ public protocol DrawableStyle: Style, Renderable {}
 
 public struct ViewStyle : DrawableStyle {
     private var savedStyle:ViewStyle? {
-        if self.originality == .Saved {
+        if self.originality == .Saved && !self.name.none {
             return DynUI.drawableStyleForName(self.name) as? ViewStyle
         }
         return nil
@@ -88,7 +99,8 @@ public struct ViewStyle : DrawableStyle {
         get { return _renderInset ?? self.savedStyle?.renderInset ?? UIEdgeInsetsZero }
     }
     
-    public func render(var context:RenderContext) {
+    public func render(context:RenderContext) {
+        var context = context
         if let rect = context.rect {
             let bez:UIBezierPath
             
@@ -135,6 +147,10 @@ public struct ViewStyle : DrawableStyle {
         }
     }
     
+    public init() {
+        self.init(NoName())
+    }
+    
     public init(name:StyleNaming) {
         self.init(newWithName:name)
     }
@@ -160,6 +176,12 @@ extension ViewStyle {
     public func withRenderInset(insets:UIEdgeInsets) -> ViewStyle {
         var new = self
         new.renderInset = insets
+        return new
+    }
+    
+    public func withBackgroundStyle(backgroundStyle:Fill) -> ViewStyle {
+        var new = self
+        new.backgroundStyle = backgroundStyle
         return new
     }
 }
@@ -191,7 +213,7 @@ public struct ButtonStyle: DrawableStyle {
     }
     
     private var savedStyle:ButtonStyle? {
-        if self.originality == .Saved {
+        if self.originality == .Saved && !self.name.none {
             return DynUI.drawableStyleForName(self.name) as? ButtonStyle
         }
         return nil
@@ -220,6 +242,10 @@ public struct ButtonStyle: DrawableStyle {
     
     public func render(context:RenderContext) { }
     
+    public init() {
+        self.init(NoName())
+    }
+    
     public init(_ savedStyleNamed:StyleNaming) {
         self.name = savedStyleNamed
         self.originality = .Saved
@@ -236,7 +262,7 @@ public struct TextStyle : Style {
     public var name:StyleNaming
     
     private var savedStyle:TextStyle? {
-        if self.originality == .Saved {
+        if self.originality == .Saved && !self.name.none {
             return DynUI.textStyleForName(self.name)
         }
         return nil
@@ -360,6 +386,14 @@ public struct TextStyle : Style {
         return css
     }
     
+    public init(_ font:UIFont, _ color: Color = Color(UIColor.blackColor())) {
+        self.originality = .New
+        self._font = font
+        self._size = font.pointSize
+        self.name = NoName()
+        self.color = color
+    }
+    
     public init(newStyleNamed name:StyleNaming, _ font:UIFont, _ color: Color = Color(UIColor.blackColor())) {
         self.originality = .New
         self._font = font
@@ -373,6 +407,10 @@ public struct TextStyle : Style {
         self.originality = .Saved
         self.name = savedStyleNamed
         self._size = size
+    }
+    
+    public init() {
+        self.init(NoName(), 0)
     }
 }
 
