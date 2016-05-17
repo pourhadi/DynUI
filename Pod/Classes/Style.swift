@@ -755,6 +755,12 @@ extension Color {
         new.brightnessAdjustment = -percent
         return new
     }
+    
+    public func withAlpha(alpha : CGFloat) -> Color {
+        var new = self
+        new.alpha = alpha
+        return new
+    }
 }
 
 extension UIColor {
