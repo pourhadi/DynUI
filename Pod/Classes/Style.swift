@@ -240,6 +240,12 @@ public struct ButtonStyle: DrawableStyle {
         set { _textStyle = newValue }
         get { return _textStyle ?? self.savedStyle?.textStyle }}
     
+    private var _disabledTextStyle:TextStyle?
+    public var disabledTextStyle:TextStyle? {
+        set { _disabledTextStyle = newValue }
+        get { return _disabledTextStyle ?? self.savedStyle?.disabledTextStyle }}
+    
+    
     public func render(context:RenderContext) { }
     
     public init() {
@@ -459,7 +465,7 @@ public struct RenderContext {
     
     private var parentStyle:Style?
 
-    init(rect:CGRect?, view:UIView?, parameters:[String:AnyObject]? = nil) {
+    public init(rect:CGRect?, view:UIView?, parameters:[String:AnyObject]? = nil) {
         self.rect = rect
         self.view = view
         self.parameters = parameters

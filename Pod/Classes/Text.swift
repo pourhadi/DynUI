@@ -90,6 +90,7 @@ extension UIButton: TextStyleable {
             self.titleLabel!.dyn_textStyle = newValue
             if let newValue = newValue, color = newValue.color {
                 self.setTitleColor(color.color, forState: .Normal)
+                self.setTitleColor(color.color.colorWithAlphaComponent(0.5), forState: .Disabled)
             }
         }
     }
