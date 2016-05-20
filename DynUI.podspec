@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |spec|
   spec.name             = 'DynUI'
-  spec.version          = '0.1.2'
+  spec.version          = '0.1.3'
   spec.license          = { :type => 'MIT' }
   spec.homepage         = 'https://github.com/pourhadi/DynUI'
   spec.authors          = { 'Dan Pourhadi' => 'dan@pourhadi.com' }
